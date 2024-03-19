@@ -1,0 +1,137 @@
+/* Theme */
+@define-color success #282;
+@define-color warning #d90;
+@define-color critical #d44;
+
+@define-color light #eee;
+@define-color dark #222;
+
+@define-color modbg @dark;
+@define-color modtxt @light;
+
+@define-color arch #3ad;
+
+
+/* Reset all styles */
+* {
+	all: unset;
+}
+
+
+/* The whole bar */
+window#waybar {
+    /* border-radius: 10px; */
+    font-family: "Inconsolata Nerd Font";
+    /*font-family: "HurmitNerdFont";*/
+    font-size: 16px;
+    font-weight: bold;
+    background: @modbg;
+}
+
+/* Every modules */
+#battery,
+#clock,
+#cpu,
+#memory,
+#network,
+#temperature,
+#tray,
+#idle_inhibitor,
+#workspaces,
+#custom-media,
+#wireplumber,
+#bluetooth,
+#language,
+#custom-arch,
+tooltip {
+    padding: 5px 13px;
+    margin: 2px 5px 2px 5px;
+    color: @modtxt;
+    background: none;
+    border-radius: 10px;
+}
+
+tooltip label {
+	color: @modtxt;
+}
+
+/* -----------------------------------------------------------------------------
+ * Modules styles
+ * -------------------------------------------------------------------------- */
+
+#bluetooth {
+	transition: background-color 0.5s, color 0.5s;
+}
+
+#bluetooth.connected {
+	background-color: @success;
+	color: @light;
+}
+
+#bluetooth.off,#bluetooth.disabled {
+	color: @light;
+	background-color: @critical;
+}
+
+#workspaces button * {
+	color: @modtxt;
+}
+
+#workspaces button.active {
+	margin-left: 1px;
+}
+
+#battery {
+	transition: background-color 0.5s, color 0.5s;
+	margin-right: 10px;
+}
+
+#battery.charging {
+	background-color: @success;
+	color: @light;
+}
+
+#battery.warning.discharging {
+	color: @light;
+	background-color: @warning;
+}
+
+#battery.critical.discharging {
+	color: @light;
+	background-color: @critical;
+}
+
+#custom-arch {
+	color: @light;
+	background-color: @arch;
+	margin-left: 10px
+}
+
+#network {
+	transition: background-color 0.5s, color 0.5s;
+}
+
+#network.disconnected {
+    background-color: @warning;
+    color: @light;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+#wireplumber {
+	transition: background-color 0.5s, color 0.5s;
+}
+
+#wireplumber.muted {
+	background-color: @critical;
+	color: @light;
+	transition: background-color 0.5s, color 0.5s;
+}
+
+#idle_inhibitor {
+	transition: background-color 0.5s, color 0.5s;
+}
+
+#idle_inhibitor.activated {
+	color: @modbg;
+	background-color: @modtxt;
+}
