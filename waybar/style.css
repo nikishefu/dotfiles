@@ -11,6 +11,8 @@
 
 @define-color arch #3ad;
 
+@define-color selected rgba(255, 255, 255, 0.1);
+
 
 /* Reset all styles */
 * {
@@ -25,10 +27,11 @@ window#waybar {
     /*font-family: "HurmitNerdFont";*/
     font-size: 16px;
     font-weight: bold;
-    background-image: url("background.png");
+    background: rgba(50, 50, 50, 0.3);
+    /* background-image: url("background.png"); */ 
 }
 
-/* Every modules */
+/* every modules */
 #battery,
 #clock,
 #cpu,
@@ -43,11 +46,12 @@ window#waybar {
 #bluetooth,
 #language,
 #custom-arch {
-    padding: 5px 12px;
-    margin: 2px 5px 2px 5px;
+    padding: 3px 8px;
+    margin: 4px 10px;
     color: @modtxt;
     background: none;
-    border-radius: 10px;
+    border-radius: 5px;
+    background: none;
 }
 
 tooltip {
@@ -64,12 +68,12 @@ tooltip label {
  * Modules styles
  * -------------------------------------------------------------------------- */
 
-#tray {
-    border-color: @light;
+#clock {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 #bluetooth {
-	transition: background-color 0.5s, color 0.5s;
+	transition: background-color 0.5s, color 0.5s, border 0.5s;
 }
 
 #bluetooth.connected {
@@ -80,70 +84,95 @@ tooltip label {
 #bluetooth.off,#bluetooth.disabled {
 	color: @light;
 	background-color: @critical;
+    border-bottom: 2px solid #922
 }
 
 #workspaces button * {
 	color: @modtxt;
 }
 
+#workspaces button {
+    transition: background-color 0.5s;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin: 0 1px;
+}
+
+#workspaces button:hover {
+    background-color: @selected;
+}
+
+#workspaces {
+    margin: 4px 0;
+    padding: 0;
+}
+
 #workspaces button.active {
-	margin-left: 1px;
+    background-color: @selected;
+}
+
+#workspaces button.active:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 #battery {
-	transition: background-color 0.5s, color 0.5s;
+	transition: background-color 0.5s, color 0.5s, border 0.5s;
 	margin-right: 10px;
 }
 
 #battery.charging {
 	background-color: @success;
 	color: @light;
+    border-bottom: 2px solid #292;
 }
 
 #battery.warning.discharging {
 	color: @light;
 	background-color: @warning;
+    border-bottom: 2px solid #a60;
 }
 
 #battery.critical.discharging {
 	color: @light;
 	background-color: @critical;
+    border-bottom: 2px solid #922
 }
 
 #custom-arch {
     color: @light;
 	background-color: @arch;
 	margin-left: 10px;
-    padding-left: 9px;
-    padding-right: 7px;
-    border-color: @light;
+    padding-left: 6px;
+    padding-right: 4px;
+    border-bottom: 2px solid #068;
 }
 
 #network {
-	transition: background-color 0.5s, color 0.5s;
+	transition: background-color 0.5s, color 0.5s, border 0.5s;
 }
 
 #network.disconnected {
     background-color: @warning;
     color: @light;
-    transition: background-color 0.5s, color 0.5s;
+    border-bottom: 2px solid #a60;
 }
 
 #wireplumber {
-	transition: background-color 0.5s, color 0.5s;
+	transition: background-color 0.5s, color 0.5s, border 0.5s;
 }
 
 #wireplumber.muted {
 	background-color: @critical;
 	color: @light;
-	transition: background-color 0.5s, color 0.5s;
+    border-bottom: 2px solid #922
 }
 
 #idle_inhibitor {
-	transition: background-color 0.5s, color 0.5s;
+	transition: background-color 0.5s, color 0.5s, border 0.5s;
 }
 
 #idle_inhibitor.activated {
 	color: @modbg;
 	background-color: @modtxt;
+    border-bottom: 2px solid #888
 }
