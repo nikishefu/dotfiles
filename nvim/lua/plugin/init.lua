@@ -2,6 +2,7 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 	use "rebelot/kanagawa.nvim"
     use "lambdalisue/suda.vim"
+    use "airblade/vim-gitgutter"
 
     use {
       'nvim-lualine/lualine.nvim',
