@@ -95,6 +95,8 @@ reflector \
     --sort rate \
     --save /etc/pacman.d/mirrorlist
 
+echo "[multilib]\nInclude = /etc/pacman.d/mirrorlist" > /etc/pacman.conf
+
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware \
     amd-ucode base-devel bind blueberry bluez bluez-utils brightnessctl \
     capitaine-cursors chromium cmake cpio cpupower discord efibootmgr \
