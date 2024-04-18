@@ -95,7 +95,7 @@ reflector \
     --sort rate \
     --save /etc/pacman.d/mirrorlist
 
-echo "[multilib]\nInclude = /etc/pacman.d/mirrorlist" > /etc/pacman.conf
+echo "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware \
     amd-ucode base-devel bind blueberry bluez bluez-utils brightnessctl \
@@ -128,15 +128,15 @@ arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 hwclock --systohc
 
-echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-echo "ru_RU.UTF-8 UTF-8" > /etc/locale.gen
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-echo $HOSTNAME >> /etc/hostname
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo $HOSTNAME > /etc/hostname
 echo ":: Enter root password"
 passwd
 
-echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers
+echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
 useradd -m -G wheel -s /usr/bin/zsh nikita
 echo ":: Enter user password"
 passwd nikita
