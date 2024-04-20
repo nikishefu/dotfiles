@@ -66,6 +66,12 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
+if [ -z "$EFI" ] || [ -z "$SWAP" ] || [ -z "$ROOT" ]; then
+    echo "Specify partitions"
+    usage
+    exit 1
+fi
+
 
 
 set -e
@@ -89,13 +95,14 @@ mount $ROOT /mnt
 mount --mkdir $EFI /mnt/boot
 swapon $SWAP
 
+echo ":: Updating mirrors ..."
 reflector \
     -c Russia,Finland \
     --latest 10 \
     --sort rate \
     --save /etc/pacman.d/mirrorlist
 
-echo "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+printf "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware \
     amd-ucode base-devel bind blueberry bluez bluez-utils brightnessctl \
