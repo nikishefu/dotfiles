@@ -102,7 +102,7 @@ reflector \
     --save /etc/pacman.d/mirrorlist
 
 
-pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware
+pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware efibootmgr git
 
 if [ -n "$NVIDIA_PARAM" ]; then
     pacstrap -G /mnt nvidia-dkms

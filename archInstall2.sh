@@ -79,6 +79,7 @@ else
 fi
 
 systemctl enable sddm
+timedatectl set-ntp true
 
 
 # USER SECTION
