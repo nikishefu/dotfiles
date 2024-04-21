@@ -5,12 +5,12 @@ usage() {
     echo "Usage: $0 [options]"
     echo "Options:"
     echo "  -h, --help"
-    echo "  -v, --version\n"
+    printf "  -v, --version\n"
     echo "  -e part, --efi  part"
     echo "  -s part, --swap part"
-    echo "  -r part, --root part\n"
+    printf "  -r part, --root part\n"
     echo "  -ws, --wipe-swap"
-    echo "  -we, --wipe-efi\n"
+    printf "  -we, --wipe-efi\n"
     echo "  -nv, --nvidia      Properly install proprietary nvidia driver"
     echo "  -ps, --power-save  Enable powersaving utilities for a laptop"
 }
@@ -21,7 +21,7 @@ version() {
 
 
 setfont ter-128b
-echo ":: Welcome to archlinux install script by nikishefu ::"
+echo ":: Archlinux install script ::"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -73,7 +73,6 @@ if [ -z "$EFI" ] || [ -z "$SWAP" ] || [ -z "$ROOT" ]; then
 fi
 
 
-
 set -e
 
 
@@ -102,22 +101,8 @@ reflector \
     --sort rate \
     --save /etc/pacman.d/mirrorlist
 
-printf "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 
-pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware \
-    amd-ucode base-devel bind blueberry bluez bluez-utils brightnessctl \
-    capitaine-cursors chromium cmake cpio cpupower discord efibootmgr \
-    fastfetch firefox gamescope gimp git gnome-calculator go grim htop \
-    hyprland imagemagick inkscape inxi kitty krita lib32-libva-mesa-driver \
-    lib32-vulkan-radeon libmpeg2 libreoffice-still libva-mesa-driver \
-    libva-utils mako meson networkmanager noto-fonts neovim thunar \
-    noto-fonts-cjk noto-fonts-emoji nvtop nwg-look obs-studio udiskie \
-    waybar pipewire wireplumber vulkan-radeon telegram-desktop zip zsh\
-    swappy slurp sudo steam sddm sdbus-cpp ripgrep qbittorrent \
-    pipewire-pulse pipewire-jack pipewire-alsa polkit-kde-agent \
-    papirus-icon-theme pavucontrol otf-hermit-nerd ttf-inconsolata-nerd \
-    openssh qemu-full qt5ct qt5-graphicaleffects qt5-wayland qt6ct \
-    qt6-wayland vlc xdg-desktop-portal-hyprland
+pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware
 
 if [ -n "$NVIDIA_PARAM" ]; then
     pacstrap -G /mnt nvidia-dkms
@@ -126,7 +111,6 @@ if [ -n "$NVIDIA_PARAM" ]; then
     mkinitcpio -P
     echo "options nvidia-drm modeset=1" >> /etc/modprobe.d/nvidia.conf
 fi
-if [ -n "$POWERSAVE" ]; then pacstrap -G /mnt tlp; fi
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
