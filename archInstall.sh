@@ -102,8 +102,8 @@ reflector \
     --save /etc/pacman.d/mirrorlist
 
 
-pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware efibootmgr \
-    git networkmanager
+pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware git \
+    networkmanager
 
 if [ -n "$NVIDIA_PARAM" ]; then
     pacstrap -G /mnt nvidia-dkms
@@ -115,23 +115,22 @@ fi
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-arch-chroot /mnt
 
-ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
-hwclock --systohc
+ln -sf /mnt/usr/share/zoneinfo/Europe/Moscow /mnt/etc/localtime
+arch-chroot /mnt hwclock --systohc
 
-echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
-locale-gen
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
-echo $HOSTNAME > /etc/hostname
+echo "en_US.UTF-8 UTF-8" >> /mnt/etc/locale.gen
+echo "ru_RU.UTF-8 UTF-8" >> /mnt/etc/locale.gen
+arch-chroot /mnt locale-gen
+echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+echo $HOSTNAME > /mnt/etc/hostname
 echo ":: Enter root password"
-passwd
+arch-chroot /mnt passwd
 
-echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
-useradd -m -G wheel -s /usr/bin/zsh nikita
+echo "%wheel ALL=(ALL:ALL) ALL" >> /mnt/etc/sudoers
+arch-chroot /mnt useradd -m -G wheel -s /usr/bin/zsh nikita
 echo ":: Enter user password"
-passwd nikita
+arch-chroot /mnt passwd nikita
 
 efibootmgr --create \
     --disk /dev/$(lsblk -ndo pkname $EFI) \
