@@ -14,7 +14,6 @@ version() {
 }
 
 
-setfont ter-128b
 echo ":: Archlinux configuration ::"
 
 while [[ $# -gt 0 ]]; do
@@ -42,12 +41,8 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-mkdir -p ~/.config
-cp -r ./* ~/.config
-
-
-# SUDO SECTION
-su -
+mkdir -p $(logname)/.config
+cp -r ./* $(logname)/.config
 
 printf "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 
@@ -82,21 +77,20 @@ systemctl enable sddm
 timedatectl set-ntp true
 
 
-# USER SECTION
-logout
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
-makepkg -si
+sudo -u $(logname) makepkg -si
 
-yay -Sy nvim-packer-git tgpt-bin tofi anydesk-bin mkinitcpio-firmware termius \
-    rose-pine-hyprcursor swayosd-git opentabletdriver
+sudo -u $(logname) yay -Sy nvim-packer-git tgpt-bin tofi anydesk-bin \
+    mkinitcpio-firmware termius rose-pine-hyprcursor swayosd-git \
+    opentabletdriver
 
 if [ -n "$POWERSAVE" ]; then
-    yay -S auto-epp
+    sudo -u $(logname) yay -S auto-epp
 fi
 
 if [ -n "$NVIDIA" ]; then
-    yay -S system76-power gamescope-nvidia
+    sudo -u $(logname) yay -S system76-power gamescope-nvidia
 fi
 

@@ -54,9 +54,6 @@ while [[ $# -gt 0 ]]; do
         -nv|--nvidia)
             NVIDIA_PARAM="nvidia_drm.modeset=1"
             ;;
-        -ps|--power-save)
-            POWERSAVE=1
-            ;;
         *)
             echo "Unknown option: $1"
             usage
@@ -103,7 +100,7 @@ reflector \
 
 
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware git \
-    networkmanager
+    networkmanager zsh
 
 if [ -n "$NVIDIA_PARAM" ]; then
     pacstrap -G /mnt nvidia-dkms
