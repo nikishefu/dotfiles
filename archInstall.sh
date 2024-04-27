@@ -5,14 +5,14 @@ usage() {
     echo "Usage: $0 [options]"
     echo "Options:"
     echo "  -h, --help"
-    printf "  -v, --version\n"
+    printf "  -v, --version\n\n"
     echo "  -e part, --efi  part"
     echo "  -s part, --swap part"
-    printf "  -r part, --root part\n"
+    printf "  -r part, --root part\n\n"
     echo "  -ws, --wipe-swap"
-    printf "  -we, --wipe-efi\n"
+    echo "  -we, --wipe-efi"
     echo "  -nv, --nvidia      Properly install proprietary nvidia driver"
-    echo "  -ps, --power-save  Enable powersaving utilities for a laptop"
+    echo "  -h name, --hostname name"
 }
 
 version() {
@@ -54,6 +54,10 @@ while [[ $# -gt 0 ]]; do
         -nv|--nvidia)
             NVIDIA_PARAM="nvidia_drm.modeset=1"
             ;;
+        -h|--hostname)
+            shift
+            HOSTNAME=$1
+            ;;
         *)
             echo "Unknown option: $1"
             usage
@@ -65,6 +69,12 @@ done
 
 if [ -z "$EFI" ] || [ -z "$SWAP" ] || [ -z "$ROOT" ]; then
     echo "Specify partitions"
+    usage
+    exit 1
+fi
+
+if [ -z "$HOSTNAME" ]; then
+    echo "Specify hostname"
     usage
     exit 1
 fi
