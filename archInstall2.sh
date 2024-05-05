@@ -51,7 +51,7 @@ pacman -Syu --needed amd-ucode base-devel bind blueberry bluez bluez-utils \
     efibootmgr fastfetch firefox gimp git gnome-calculator go grim \
     htop hyprland imagemagick inkscape inxi kitty krita lib32-libva-mesa-driver \
     lib32-vulkan-radeon libmpeg2 libreoffice-still libva-mesa-driver \
-    libva-utils mako meson networkmanager noto-fonts neovim thunar \
+    libva-utils mako meson networkmanager noto-fonts neovim nautilus \
     noto-fonts-cjk noto-fonts-emoji nvtop nwg-look obs-studio udiskie \
     waybar pipewire wireplumber vulkan-radeon telegram-desktop zip zsh\
     swappy slurp sudo steam sdbus-cpp ripgrep qbittorrent \
@@ -59,7 +59,7 @@ pacman -Syu --needed amd-ucode base-devel bind blueberry bluez bluez-utils \
     papirus-icon-theme pavucontrol otf-hermit-nerd ttf-inconsolata-nerd \
     openssh qemu-full qt5ct qt5-graphicaleffects qt5-wayland qt6ct \
     qt6-wayland vlc xdg-desktop-portal-hyprland linux-zen-headers hyprlock \
-    hypridle hyprpaper obsidian greetd
+    hypridle hyprpaper obsidian greetd dex
 
 
 systemctl enable greetd
@@ -82,8 +82,9 @@ if [ -n "$POWERSAVE" ]; then
     systemctl mask systemd-rfkill
     systemctl mask systemd-rfkill.socket
 
-    sudo -u $(logname) yay -S auto-epp
-    systemctl enable --now auto-epp
+    cp ./scripts/* /usr/local/bin
+    cp ./udev_rules/* /etc/udev/rules.d/
+    cp ./services/enablePowersave.service /etc/systemd/system
 fi
 
 if [ -n "$NVIDIA" ]; then

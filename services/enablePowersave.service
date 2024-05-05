@@ -1,0 +1,13 @@
+[Unit]
+Description=Enable powersave mode
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/enablePowersave.sh
+Restart=always
+User=root
+Group=root
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
