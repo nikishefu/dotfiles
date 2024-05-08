@@ -1,0 +1,80 @@
+@define-color light #fff;
+@define-color dark  #222;
+@define-color darkGlass rgba(0, 0, 0, 0.2);
+@define-color lightGlass rgba(255, 255, 255, 0.2);
+@define-color bg    @lightGlass;
+@define-color fg    @dark;
+
+window.bar {
+    background-color: @bg;
+    color: @fg;
+}
+
+
+.left {
+    margin: 3px;
+    margin-left: 10px;
+}
+
+.right {
+    margin: 3px;
+    margin-right: 10px;
+}
+
+.osLabel {
+    font-size: 18px;
+}
+
+.volume, .battery {
+    font-size: 17px;
+}
+
+.right > * {
+    margin-left: 10px;
+}
+
+.battery > label {
+    margin-left: 5px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 15px;
+    font-family: "Cantarell";
+}
+
+button {
+    min-width: 5px;
+    min-height: 5px;
+}
+
+.workspaces button {
+    background-color: @darkGlass;
+    margin: 7px 2px;
+    color: @fg;
+    border: none;
+    transition: min-width 0.2s, background-color 0.4s, color 0.4s;
+}
+
+.workspaces button:hover {
+
+}
+
+.workspaces button.focused {
+    min-width: 20px;
+    background-color: @fg;
+    color: @light;
+}
+
+.client-title {
+    color: @theme_selected_bg_color;
+}
+
+.notification {
+    color: yellow;
+}
+
+levelbar block,
+highlight {
+    min-height: 10px;
+}
