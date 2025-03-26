@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+monitor-sensor --accel | while read -r -a line ; do
+    if [[ ${line[0]} == "Accelerometer" ]] ; then
+        case ${line[-1]} in
+            normal)
+                echo Normal
+                ;;
+            left-up)
+                ;;
+            bottom-up)
+                ;;
+            right-up)
+                ;;
+        esac
+    fi
+done

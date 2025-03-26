@@ -1,0 +1,175 @@
+// Global 
+{
+    "layer": "top",
+    "position": "top",
+    "spacing": 3,
+
+    "modules-left": [
+        "custom/arch",
+        "hyprland/workspaces",
+        "idle_inhibitor",
+        "wireplumber",
+        "bluetooth",
+    ],
+ 
+    "modules-center": [
+        "clock",
+        "privacy",
+        "systemd-failed-units"
+    ],
+
+    "modules-right": [
+        "custom/yandex_trains",
+        "tray",
+        "hyprland/language",
+        "network",
+        "upower"
+    ],
+
+    // Modules
+
+    "custom/arch": {
+    	"format": "󰣇 ",
+        "tooltip": false,
+	},
+
+    "custom/yandex_trains": {
+        "exec": "~/.config/waybar/yandex_trains",
+        "interval": 60,
+        "format": "󰔬 {}"
+    },
+
+    "privacy": {
+        "icon-spacing": 5,
+        "icon-size": 13,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ]
+    },
+
+	"bluetooth": {
+		"format": "",
+		"on-click": "blueberry",
+		"format-connected-battery": " {device_battery_percentage}%",
+		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+},
+    
+    "idle_inhibitor": {
+        "format": "{icon} ",
+        "format-icons":{
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "upower": {
+        "icon-size": 12,
+        "format": " {percentage} <span alpha=\"50%\">{time}</span>",
+        "on-click": "notify-send 'Battery info' \"$(upower -d | grep -E \"cycles|rate|capacity\" | head -n 3 | cut -c 5-)\""
+    },
+
+    "wireplumber": {
+	    "format": "{volume}% {icon}",
+	    "format-muted": "{volume}%  ",
+	    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+	    "on-click-right": "pavucontrol",
+	    "format-icons": [" ", " ", " "]
+	},
+
+    "systemd-failed-units": {
+        "format": "Units failed: {nr_failed}"
+    },
+
+    "clock": {
+        "interval": 10,
+        "format": "{:%H:%M %a %e}",
+    	"tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "year",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "on-click-right": "mode",
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+    },
+
+    "cpu": {
+        "interval": 5,
+        "format": "  {usage}% ({load})", // Icon: microchip
+        "states": {
+            "warning": 70,
+            "critical": 90,
+        },
+        "on-click": "kitty -e 'btm'",
+    },
+
+    "custom/keyboard-layout": {
+        "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
+        // Interval set only as a fallback, as the value is updated by signal
+        "interval": 30,
+        "format": "  {}", // Icon: keyboard
+        // Signal sent by Sway key binding (~/.config/sway/key-bindings)
+        "signal": 1, // SIGHUP
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/keyhint.sh",
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": "  {}%", // Icon: memory
+        "on-click": "kitty -e 'btm'", 
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": " ",
+        "format-ethernet": " ",
+        "format-disconnected": " ",
+        "tooltip-format": "{ifname}: {ipaddr}",
+        "on-click": "iwctl station wlan0 scan && notify-send Scanning...",
+    },
+
+	"hyprland/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"active": "",
+			"default": ""
+		},
+	},
+
+    "hyprland/language": {
+	    "format": "{}",
+	    "format-en": "En",
+	    "format-ru": "Ru",
+	    "keyboard-name": "keyd-virtual-keyboard"
+	},
+
+    "tray": {
+        "icon-size": 15,
+        "spacing": 8,
+     }
+}

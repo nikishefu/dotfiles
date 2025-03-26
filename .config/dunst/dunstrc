@@ -1,0 +1,29 @@
+[global]
+format = "<b>%s</b> <i>%p</i>\n %b"
+icon_theme = Tela-circle-ubuntu-dark
+default_icon = dialog-information
+font = HurmitNerdFont 10
+enable_recursive_icon_lookup = true
+corner_radius = 5
+frame_width = 1
+horizontal_padding = 10
+padding = 5
+
+foreground = "#ffffff"
+background = "#502010"
+frame_color = "#D5863A"
+
+[urgency_low]
+background = "#1e2127"
+foreground = "#ffffff"
+frame_color = "#61afef"
+
+[urgency_normal]
+foreground = "#ffffff"
+background = "#502010"
+frame_color = "#D5863A"
+
+[urgency_critical]
+background = "#882222"
+foreground = "#ffffff"
+frame_color = "#ff5555"

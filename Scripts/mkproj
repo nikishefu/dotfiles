@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 1 ]]; then
+    echo "Specify directory: mkproj dir_name"
+    exit 1
+fi
+
+proj_dir="$HOME/Projects/$1"
+mkdir "$proj_dir"
+
+if [[ -z $TMUX ]]; then
+    tmux new-session -s $1 -c $proj_dir
+else
+    tmux send-keys "cd $proj_dir" C-m
+fi
+
+

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function runTimer {
+    sleep ${1}m
+    notify-send -i clock Timer "Time is up"
+}
+
+read -p "Enter amount of minutes: " min
+runTimer $min &

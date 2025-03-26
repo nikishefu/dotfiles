@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+killall squeekboard
+killall iio-hyprland
+killall lisgd
+sed -i 's/false/true/g' ~/.config/hypr/touchpad.conf
+hyprctl reload

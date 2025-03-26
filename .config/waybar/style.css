@@ -1,0 +1,172 @@
+/* Theme */
+@define-color success #282;
+@define-color warning #d80;
+@define-color critical #c44;
+
+@define-color light #fff;
+@define-color dark #502010;
+
+@define-color modbor #D5863A;
+@define-color modshad @dark;
+
+@define-color modbg @dark;
+@define-color modbginv @modbor;
+@define-color modfg @light;
+@define-color modfginv @dark;
+
+@define-color arch #3ad;
+
+@define-color selected rgba(255, 255, 255, 0.1);
+
+
+/* Reset all styles */
+* {
+    all: unset;
+}
+
+
+/* The whole bar */
+window#waybar {
+    font-family: "HurmitNerdFont", "JetBrainsMono Nerd Font";
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#tray menu {
+    background: @modfginv;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#tray menuitem {
+    margin: 1px;
+    border-radius: 5px;
+    padding: 2px 4px;
+    background: #222222;
+    border: 1px solid #444444;
+}
+
+#tray menuitem:hover {
+    background: #333333;
+}
+
+.module,
+#privacy {
+    color: @modfg;
+    margin: 2px 2px 2px 2px;
+    padding: 2px 8px 0 8px;
+    border-radius: 5px;
+    background: @modbg;
+    border: 1px solid @modbor;
+    box-shadow: 0 0 2px @modshad;
+}
+
+.modules-left {
+    border-radius: 0 0 5px 0;
+}
+
+.modules-center {
+    border-radius: 0 0 5px 5px;
+}
+
+.modules-right {
+    border-radius: 0 0 0 5px;
+}
+
+tooltip {
+    padding: 5px 12px;
+    background-color: @modfginv;
+    border-radius: 5px;
+}
+
+tooltip label {
+    color: @modfg;
+}
+
+/* -----------------------------------------------------------------------------
+ * Modules styles
+ * -------------------------------------------------------------------------- */
+
+
+#bluetooth {
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+#bluetooth.connected {
+    background-color: @modbginv;
+    color: @modfginv;
+}
+
+#bluetooth.off,
+#bluetooth.disabled {
+    color: @modfg;
+    background-color: @critical;
+}
+
+#workspaces button * {
+    color: @modfg;
+}
+
+#workspaces button {
+    padding: 0 9px 0 5px;
+}
+
+#workspaces {
+    padding: 0 3px;
+}
+
+#battery {
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+#systemd-failed-units {
+    background: @critical;
+}
+
+#battery.charging,
+#upower.charging {
+    background-color: @modbginv;
+    color: @modfginv;
+}
+
+#battery.warning.discharging {
+    color: @light;
+    background-color: @warning;
+}
+
+#battery.critical.discharging {
+    color: @light;
+    background-color: @critical;
+}
+
+#custom-arch {
+    padding-left: 6px;
+    padding-right: 2px;
+}
+
+#network {
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+#network.disconnected {
+    background-color: @warning;
+    color: @light;
+}
+
+#wireplumber {
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+#wireplumber.muted {
+    background-color: @critical;
+    color: @light;
+}
+
+#idle_inhibitor {
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+#idle_inhibitor.activated {
+    color: @modfginv;
+    background-color: @modbginv;
+}

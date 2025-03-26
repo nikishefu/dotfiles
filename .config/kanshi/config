@@ -1,0 +1,11 @@
+profile {
+    output eDP-1 enable
+}
+profile double {
+    output * enable
+    output eDP-1 enable
+}
+profile single {
+    output * enable
+    output eDP-1 disable
+}

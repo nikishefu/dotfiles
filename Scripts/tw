@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+selected=$(find ~/Projects ~/Documents ~/.config ~/Downloads ~/ -mindepth 1 -maxdepth 1 -type d | fzf)
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+
+if [[ -z $TMUX ]]; then
+    tmux new-session -s $selected_name -c $selected
+else
+    tmux send-keys "cd $selected" C-m
+fi
+

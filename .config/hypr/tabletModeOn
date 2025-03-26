@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+squeekboard &
+lisgd &
+sed -i 's/true/false/g' ~/.config/hypr/touchpad.conf
+hyprctl reload
