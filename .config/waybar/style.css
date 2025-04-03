@@ -3,18 +3,17 @@
 @define-color warning #d80;
 @define-color critical #c44;
 
-@define-color light #fff;
-@define-color dark #502010;
+@define-color light #eee;
+@define-color dark #222;
 
-@define-color modbor #D5863A;
+@define-color modbor #444;
 @define-color modshad @dark;
 
 @define-color modbg @dark;
-@define-color modbginv @modbor;
 @define-color modfg @light;
+@define-color modborinv @light;
+@define-color modbginv @modborinv;
 @define-color modfginv @dark;
-
-@define-color arch #3ad;
 
 @define-color selected rgba(255, 255, 255, 0.1);
 
@@ -93,6 +92,7 @@ tooltip label {
 }
 
 #bluetooth.connected {
+    border-color: @modborinv;
     background-color: @modbginv;
     color: @modfginv;
 }
@@ -125,6 +125,7 @@ tooltip label {
 
 #battery.charging,
 #upower.charging {
+    border-color: @modborinv;
     background-color: @modbginv;
     color: @modfginv;
 }
@@ -168,5 +169,6 @@ tooltip label {
 
 #idle_inhibitor.activated {
     color: @modfginv;
+    border-color: @modborinv;
     background-color: @modbginv;
 }

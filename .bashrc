@@ -17,7 +17,7 @@ exitstatus() {
 
 bind 'set show-all-if-ambiguous on'
 
-export PATH="$HOME/.config/scripts:$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/Scripts:$HOME/.config/emacs/bin:$PATH"
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
