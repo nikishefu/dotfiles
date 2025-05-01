@@ -19,6 +19,7 @@
     ],
 
     "modules-right": [
+        "custom/updates",
         "custom/yandex_trains",
         "tray",
         "hyprland/language",
@@ -37,6 +38,12 @@
         "exec": "~/.config/waybar/yandex_trains",
         "interval": 60,
         "format": "󰔬 {}"
+    },
+
+    "custom/updates": {
+        "exec": "checkupdates | wc -l",
+        "interval": 3600,
+        "format": "󰏓 {}"
     },
 
     "privacy": {

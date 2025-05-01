@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+notify-send Tablet mode
 squeekboard &
 lisgd &
 sed -i 's/true/false/g' ~/.config/hypr/touchpad.conf
