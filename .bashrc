@@ -22,6 +22,7 @@ export PATH="$HOME/Scripts:$HOME/.config/emacs/bin:$PATH"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias nv='nvim .'
+alias e='yazi'
 alias tmux='TERM=xterm-256color tmux'
 alias ssh='TERM=xterm-256color ssh'
 alias newsboat='https_proxy="socks5://127.0.0.1:10808" newsboat'

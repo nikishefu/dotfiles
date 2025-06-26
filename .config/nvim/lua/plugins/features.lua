@@ -1,22 +1,3 @@
-local function escape(str)
-    -- You need to escape these characters to work correctly
-    local escape_chars = [[;,."|\]]
-    return vim.fn.escape(str, escape_chars)
-end
-
-
--- Recommended to use lua template string
-local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
-local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
-local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
-local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
-
-vim.opt.langmap = vim.fn.join({
-    -- | `to` should be first     | `from` should be second
-    escape(ru_shift) .. ';' .. escape(en_shift),
-    escape(ru) .. ';' .. escape(en),
-}, ',')
-
 return {
     {
         "lambdalisue/suda.vim",
@@ -24,16 +5,6 @@ return {
             vim.api.nvim_create_user_command("W", "SudaWrite", {})
         end,
     },
-
-    {
-        'Wansmer/langmapper.nvim',
-        lazy = false,
-        priority = 1, -- High priority is needed if you will use `autoremap()`
-        config = function()
-            require('langmapper').setup({ --[[ your config ]] })
-        end,
-    },
-
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -42,11 +13,11 @@ return {
 
             configs.setup({
                 ensure_installed = {
-                    "latex", "cpp", "css", "cmake", "python", "dockerfile",
+                    "cpp", "css", "cmake", "python", "dockerfile",
                     "bash", "yaml", "go", "gosum", "gomod", "c", "lua", "vim",
-                    "vimdoc", "query", "hyprlang", "jq", "make", "toml", "tmux",
+                    "query", "hyprlang", "jq", "make", "toml", "tmux",
                     "markdown_inline", "rust", "ssh_config", "sql", "strace",
-                    "diff", "csv", "asm", "git_config", "gitcommit",
+                    "diff", "csv", "git_config", "gitcommit",
                     "gitignore", "git_rebase", "json"
                 },
 
@@ -65,27 +36,6 @@ return {
             })
         end,
     },
-
-    {
-        'nvim-orgmode/orgmode',
-        event = 'VeryLazy',
-        ft = { 'org' },
-        config = function()
-            -- Setup orgmode
-            require('orgmode').setup({
-                org_agenda_files = '~/orgfiles/**/*',
-                org_default_notes_file = '~/orgfiles/refile.org',
-            })
-
-            -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
-            -- add ~org~ to ignore_install
-            -- require('nvim-treesitter.configs').setup({
-            --   ensure_installed = 'all',
-            --   ignore_install = { 'org' },
-            -- })
-        end,
-    },
-
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
@@ -93,45 +43,112 @@ return {
         -- use opts = {} for passing setup options
         -- this is equivalent to setup({}) function
     },
-
+    ---@type LazySpec
     {
-        "folke/trouble.nvim",
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
-        cmd = "Trouble",
+        "mikavilpas/yazi.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            -- check the installation instructions at
+            -- https://github.com/folke/snacks.nvim
+            "folke/snacks.nvim"
+        },
         keys = {
             {
-                "<leader>d",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
+                "<leader>e",
+                mode = { "n", "v" },
+                "<cmd>Yazi<cr>",
+                desc = "Open yazi at the current file",
             },
             {
-                "<leader>D",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
+                -- Open in the current working directory
+                "<leader>cw",
+                "<cmd>Yazi cwd<cr>",
+                desc = "Open the file manager in nvim's working directory",
             },
             {
-                "<leader>s",
-                "<cmd>Trouble symbols toggle focus=false<cr>",
-                desc = "Symbols (Trouble)",
+                "<c-up>",
+                "<cmd>Yazi toggle<cr>",
+                desc = "Resume the last yazi session",
             },
-            {
-                "<leader>r",
-                "<cmd>Trouble lsp toggle focus=false<cr>",
-                desc = "LSP Definitions / references / ... (Trouble)",
+        },
+        ---@type YaziConfig | {}
+        opts = {
+            -- if you want to open yazi instead of netrw, see below for more info
+            open_for_directories = true,
+            keymaps = {
+                show_help = "<f1>",
             },
+        },
+        -- 👇 if you use `open_for_directories=true`, this is recommended
+        init = function()
+            -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
+            -- vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+        end,
+    },
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        ---@type snacks.Config
+        opts = {
+            indent = { enabled = true },
+            scroll = { enabled = true },
+            quickfile = { enabled = true },
+            bigfile = { enabled = true },
+            dim = { enabled = true },
+            toggle = { enabled = true },
+            words = { enabled = true },
+            lazygit = { enabled = true },
+        },
+        keys = {
+            { "<leader>sc", function() Snacks.picker.colorschemes() end,     desc = "Colorschemes" },
+            { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference", mode = { "n", "t" } },
+            { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+            { "<leader>lg", function() Snacks.lazygit() end,                 desc = "Lazygit" },
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "VeryLazy",
+                callback = function()
+                    -- Setup some globals for debugging (lazy-loaded)
+                    _G.dd = function(...)
+                        Snacks.debug.inspect(...)
+                    end
+                    _G.bt = function()
+                        Snacks.debug.backtrace()
+                    end
+                    vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+                    -- Create some toggle mappings
+                    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+                    Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+                    Snacks.toggle.diagnostics():map("<leader>ud")
+                    Snacks.toggle.inlay_hints():map("<leader>uh")
+                    Snacks.toggle.indent():map("<leader>ug")
+                    Snacks.toggle.dim():map("<leader>sd")
+                end,
+            })
+        end,
+    },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+        keys = {
             {
-                "<leader>xL",
-                "<cmd>Trouble loclist toggle<cr>",
-                desc = "Location List (Trouble)",
-            },
-            {
-                "<leader>xQ",
-                "<cmd>Trouble qflist toggle<cr>",
-                desc = "Quickfix List (Trouble)",
+                "<leader>?",
+                function()
+                    require("which-key").show({ global = false })
+                end,
+                desc = "Buffer Local Keymaps (which-key)",
             },
         },
     },
-
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
@@ -150,8 +167,7 @@ return {
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
             vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
-            vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-            vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
+            vim.keymap.set('n', '<leader>/', builtin.live_grep, {})
             vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
             vim.keymap.set('n', '<leader>of', builtin.oldfiles, {})
             vim.keymap.set('n', '<leader>cs', builtin.colorscheme, {})
@@ -182,7 +198,7 @@ return {
             -- REQUIRED
 
             vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-            vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+            vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
             vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
             vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
@@ -190,8 +206,8 @@ return {
             vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
 
             -- Toggle previous & next buffers stored within Harpoon list
-            vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-            vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+            vim.keymap.set("n", "<leader>q", function() harpoon:list():prev() end)
+            vim.keymap.set("n", "<leader>e", function() harpoon:list():next() end)
 
             vim.cmd('highlight! HarpoonInactive guibg=NONE guifg=#63698c')
             vim.cmd('highlight! HarpoonActive guibg=NONE guifg=white')
@@ -207,43 +223,4 @@ return {
             require("harpoon-tabline"):setup();
         end
     },
-    {
-        "tpope/vim-dispatch",
-    },
-    {
-        "nvim-neorg/neorg",
-        lazy = false,  -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-        version = "*", -- Pin Neorg to the latest stable release
-        config = function()
-            require("neorg").setup {
-                load = {
-                    ["core.defaults"] = {},
-                    ["core.concealer"] = {},
-                    ["core.dirman"] = {
-                        config = {
-                            workspaces = {
-                                notes = "~/Notes",
-                            },
-                            default_workspace = "notes",
-                        }
-                    },
-                    ["core.completion"] = {
-                        config = {
-                            engine = "nvim-cmp",
-                            name = "[Neorg]"
-                        }
-                    },
-                    ["core.summary"] = {},
-                    ["core.text-objects"] = {},
-                }
-            }
-            vim.wo.foldlevel = 99
-            vim.wo.conceallevel = 2
-            vim.keymap.set("i", "<CR>", "neorg.itero.next-iteration", {})
-            vim.keymap.set("n", "<C-k>", "<Plug>(neorg.text-objects.item-up)", {})
-            vim.keymap.set("n", "<C-j>", "<Plug>(neorg.text-objects.item-down)", {})
-            vim.keymap.set({ "o", "x" }, "iH", "<Plug>(neorg.text-objects.textobject.heading.inner)", {})
-            vim.keymap.set({ "o", "x" }, "aH", "<Plug>(neorg.text-objects.textobject.heading.outer)", {})
-        end,
-    }
 }

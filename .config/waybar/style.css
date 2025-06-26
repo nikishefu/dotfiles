@@ -3,17 +3,17 @@
 @define-color warning #d80;
 @define-color critical #c44;
 
-@define-color light #eee;
-@define-color dark #222;
+@define-color light #ccc;
+@define-color dark rgba(30, 30, 30, 0.5);
 
-@define-color modbor #444;
+@define-color modbor #333;
 @define-color modshad @dark;
 
 @define-color modbg @dark;
 @define-color modfg @light;
 @define-color modborinv @light;
 @define-color modbginv @modborinv;
-@define-color modfginv @dark;
+@define-color modfginv #000;
 
 @define-color selected rgba(255, 255, 255, 0.1);
 
@@ -26,9 +26,11 @@
 
 /* The whole bar */
 window#waybar {
-    font-family: "HurmitNerdFont", "JetBrainsMono Nerd Font";
+    font-family: "JetBrainsMono Nerd Font", "HurmitNerdFont";
     font-size: 12px;
     font-weight: bold;
+
+    background: @modbg;
 }
 
 #tray menu {
@@ -52,12 +54,16 @@ window#waybar {
 .module,
 #privacy {
     color: @modfg;
-    margin: 2px 2px 2px 2px;
-    padding: 2px 8px 0 8px;
-    border-radius: 5px;
+    /* margin: 2px 2px 0px 2px;
     background: @modbg;
     border: 1px solid @modbor;
-    box-shadow: 0 0 2px @modshad;
+    */
+    margin: 0;
+    background: none;
+
+    padding: 2px 8px 1px 8px;
+    border-radius: 5px;
+    /* box-shadow: 0 0 2px @modshad; */
 }
 
 .modules-left {

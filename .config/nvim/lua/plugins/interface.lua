@@ -26,6 +26,7 @@ return {
 
     { "airblade/vim-gitgutter" },
     { 'danilamihailov/beacon.nvim' },
+    { 'xiyaowong/transparent.nvim' },
 
     {
         "nvim-lualine/lualine.nvim",
@@ -37,32 +38,6 @@ return {
                 options = {
                     theme = require("lualineThemes.transparent").theme(),
                 }
-            }
-        end,
-    },
-
-    {
-        "nvim-tree/nvim-tree.lua",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            local function my_on_attach(bufnr)
-                local api = require "nvim-tree.api"
-
-                local function opts(desc)
-                    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-                end
-
-                -- default mappings
-                api.config.mappings.default_on_attach(bufnr)
-
-                vim.keymap.del("n", "<C-e>", { buffer = bufnr })
-                vim.keymap.set("n", "<C-e>", vim.cmd.NvimTreeToggle)
-            end
-
-            require("nvim-tree").setup {
-                on_attach = my_on_attach,
             }
         end,
     },
