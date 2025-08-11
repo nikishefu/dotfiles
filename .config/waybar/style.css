@@ -3,20 +3,22 @@
 @define-color warning #d80;
 @define-color critical #c44;
 
-@define-color light #ccc;
-@define-color dark rgba(30, 30, 30, 0.5);
+@define-color light rgb(250, 250, 250);
+@define-color dark rgb(30, 30, 30);
+
+@define-color darkbg rgba(30, 30, 30, 0.6);
+@define-color lightbg rgba(250, 250, 250, 0.6);
 
 @define-color modbor #333;
 @define-color modshad @dark;
 
-@define-color modbg @dark;
+@define-color modbg @darkbg;
 @define-color modfg @light;
+
+@define-color modbginv @light;
+@define-color modfginv @dark;
+
 @define-color modborinv @light;
-@define-color modbginv @modborinv;
-@define-color modfginv #000;
-
-@define-color selected rgba(255, 255, 255, 0.1);
-
 
 /* Reset all styles */
 * {
