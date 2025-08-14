@@ -1,0 +1,6 @@
+capslock = overload(control, esc)
+leftcontrol = capslock
+
+[global]
+overload_tap_timeout = 200
+layer_indicator = 1
