@@ -6,6 +6,7 @@
 [[ $- != *i* ]] && return
 
 source /usr/share/git/completion/git-prompt.sh
+source ~/completion.bash
 
 exitstatus() {
     if [[ $? == 0 ]]; then
