@@ -7,27 +7,27 @@ vim.cmd([[
 
 return {
     {
-        "rebelot/kanagawa.nvim",
+        "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
+        opts = {},
         config = function()
-            require("kanagawa").setup({
-                transparent = true,
-                theme = "dark",
-                background = {
-                    dark = "wave",
-                    light = "lotus",
-                }
+            require("tokyonight").setup({
+                -- use the night style
+                style = "night",
+
+                styles = {
+                    -- Background styles. Can be "dark", "transparent" or "normal"
+                    sidebars = "normal", -- style for sidebars, see below
+                    floats = "normal",   -- style for floating windows
+                },
             })
-            -- load the colorscheme here
-            vim.cmd("colorscheme kanagawa")
-        end,
+            vim.cmd [[ colorscheme tokyonight-night ]]
+        end
     },
 
     { "airblade/vim-gitgutter" },
     { 'danilamihailov/beacon.nvim' },
-    { 'xiyaowong/transparent.nvim' },
-
     {
         "nvim-lualine/lualine.nvim",
         dependencies = {
@@ -36,7 +36,7 @@ return {
         config = function()
             require('lualine').setup {
                 options = {
-                    theme = require("lualineThemes.transparent").theme(),
+                    theme = 'tokyonight-night'
                 }
             }
         end,

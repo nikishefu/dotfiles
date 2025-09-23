@@ -40,16 +40,12 @@ return {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         config = true
-        -- use opts = {} for passing setup options
-        -- this is equivalent to setup({}) function
     },
     ---@type LazySpec
     {
         "mikavilpas/yazi.nvim",
         event = "VeryLazy",
         dependencies = {
-            -- check the installation instructions at
-            -- https://github.com/folke/snacks.nvim
             "folke/snacks.nvim"
         },
         keys = {
@@ -205,8 +201,8 @@ return {
             vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
 
             -- Toggle previous & next buffers stored within Harpoon list
-            vim.keymap.set("n", "<leader>q", function() harpoon:list():prev() end)
-            vim.keymap.set("n", "<leader>e", function() harpoon:list():next() end)
+            vim.keymap.set("n", "<leader>j", function() harpoon:list():prev() end)
+            vim.keymap.set("n", "<leader>k", function() harpoon:list():next() end)
 
             vim.cmd('highlight! HarpoonInactive guibg=NONE guifg=#63698c')
             vim.cmd('highlight! HarpoonActive guibg=NONE guifg=white')
@@ -231,4 +227,35 @@ return {
         end,
         ft = { "markdown" },
     },
+    {
+        "kndndrj/nvim-dbee",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        build = function()
+            -- Install tries to automatically detect the install method.
+            -- if it fails, try calling it with one of these parameters:
+            --    "curl", "wget", "bitsadmin", "go"
+            require("dbee").install()
+        end,
+        config = function()
+            require("dbee").setup(
+                vim.keymap.set("n", "<leader>db", "<cmd>Dbee<CR>", { noremap = true, silent = true })
+            )
+        end,
+    },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        ---@type Flash.Config
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+            { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+            { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+            { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+        },
+    }
 }

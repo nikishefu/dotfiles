@@ -1,0 +1,30 @@
+[time]
+command=date '+%R %a %e '
+interval=5
+
+[cpu]
+command=mpstat 1 2 | grep "Average" | awk '{ print "CPU", 100 - $12 "%"  }'
+color=#bbbbff
+interval=5
+
+[vol]
+command=wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print " ", $2 * 100, "%"}' && if ! [ -z "$button" ]; then i3-msg exec pavucontrol; fi
+interval=once
+signal=10
+color=#F79494
+
+[weather]
+command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo | 
+interval=3600
+color=#A4C2F4
+
+[ip]
+command=hostname -i | awk '{ print $1 }'
+interval=once
+color=#91E78B
+
+[close]
+full_text=[]
+command=i3-msg kill >/dev/null
+color=#FF9999
+
