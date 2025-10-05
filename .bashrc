@@ -19,10 +19,11 @@ exitstatus() {
 bind 'set show-all-if-ambiguous on'
 
 export PATH="$HOME/Scripts:$HOME/.config/emacs/bin:$PATH"
+export PATH=$PATH:$(go env GOPATH)/bin
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias nv='nvim .'
+alias nv='nvim'
 alias e='yazi'
 alias tmux='TERM=xterm-256color tmux'
 alias ssh='TERM=xterm-256color ssh'

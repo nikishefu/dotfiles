@@ -70,7 +70,7 @@ return {
         ---@type YaziConfig | {}
         opts = {
             -- if you want to open yazi instead of netrw, see below for more info
-            open_for_directories = true,
+            open_for_directories = false,
             keymaps = {
                 show_help = "<f1>",
             },
@@ -257,5 +257,61 @@ return {
             { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },
+    },
+    {
+        "zk-org/zk-nvim",
+        config = function()
+            require("zk").setup({
+                -- Can be "telescope", "fzf", "fzf_lua", "minipick", "snacks_picker",
+                -- or select" (`vim.ui.select`).
+                picker = "telescope",
+
+                lsp = {
+                    -- `config` is passed to `vim.lsp.start(config)`
+                    config = {
+                        name = "zk",
+                        cmd = { "zk", "lsp" },
+                        filetypes = { "markdown" },
+                        -- on_attach = ...
+                        -- etc, see `:h vim.lsp.start()`
+                    },
+
+                    -- automatically attach buffers in a zk notebook that match the given filetypes
+                    auto_attach = {
+                        enabled = true,
+                    },
+                },
+            })
+            local opts = { noremap = true, silent = false }
+
+            -- Create a new note after asking for its title.
+            vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
+
+            -- Open notes.
+            vim.api.nvim_set_keymap("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opts)
+            -- Open notes associated with the selected tags.
+            vim.api.nvim_set_keymap("n", "<leader>zt", "<Cmd>ZkTags<CR>", opts)
+
+            -- Search for the notes matching a given query.
+            vim.api.nvim_set_keymap("n", "<leader>zf",
+                "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", opts)
+            -- Search for the notes matching the current visual selection.
+            vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<leader>zl", ":ZkInsertLink<CR>", opts)
+        end,
+    },
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {},
+        config = function()
+            require('render-markdown').setup({
+                completions = { lsp = { enabled = true } },
+            })
+        end
     }
 }
