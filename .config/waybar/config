@@ -34,18 +34,6 @@
         "tooltip": false,
 	},
 
-    "custom/yandex_trains": {
-        "exec": "~/.config/waybar/yandex_trains",
-        "interval": 60,
-        "format": "󰔬 {}"
-    },
-
-    "custom/updates": {
-        "exec": "checkupdates | wc -l",
-        "interval": 3600,
-        "format": "󰏓 {}"
-    },
-
     "privacy": {
         "icon-spacing": 5,
         "icon-size": 13,
