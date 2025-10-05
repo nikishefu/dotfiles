@@ -44,19 +44,11 @@ vim.diagnostic.config({
     }
 })
 
-vim.cmd("hi LineNr guibg=NONE")
-vim.api.nvim_set_hl(0, 'SignColumn', {
-    bg = 'NONE',      -- Transparent background
-    ctermbg = 'NONE', -- For terminal transparency
-})
-
 -- Diagnostic signs remove bg
 vim.api.nvim_set_hl(0, 'DiagnosticSignError', { link = 'DiagnosticError', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'DiagnosticSignWarn', { link = 'DiagnosticWarn', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'DiagnosticSignInfo', { link = 'DiagnosticInfo', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'DiagnosticSignHint', { link = 'DiagnosticHint', bg = 'NONE' })
-
-vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#181828' })
 
 -- Wrap for specific filetypes
 vim.api.nvim_create_autocmd('BufEnter', {
