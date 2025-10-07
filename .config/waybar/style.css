@@ -115,8 +115,22 @@ tooltip label {
     color: @modfg;
 }
 
+#workspaces button.active {
+    background-color: @modbginv;
+}
+
+#workspaces button.active * {
+    color: @modfginv;
+}
+
+#workspaces button.urgent {
+    background-color: @critical;
+}
+
 #workspaces button {
-    padding: 0 9px 0 5px;
+    border-radius: 3px;
+    padding: 0 5px;
+    margin: 2 2px;
 }
 
 #workspaces {
