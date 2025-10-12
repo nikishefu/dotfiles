@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
-selected=$(fd --type directory --follow --hidden --max-depth 1 . ~/Projects ~/Scripts ~/Documents ~/.config ~/Downloads ~/ | fzf)
+selected=$({ \
+    fd --type directory --follow --hidden --max-depth 1 . \
+    ~/Scripts ~/Documents ~/.config ~/Downloads ~/; \ 
+    fd --type directory --follow --hidden . \
+    ~/Projects; } | fzf)
 
 if [[ -z $selected ]]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
-
 if [[ -z $TMUX ]]; then
-    tmux new-session -s $selected_name -c $selected
+    tmux new-session -c $selected
 else
     tmux send-keys "cd $selected" C-m
 fi
