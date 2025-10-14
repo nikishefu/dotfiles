@@ -35,6 +35,18 @@ window#waybar {
     background: @modbg;
 }
 
+#power-profiles-daemon.performance {
+    color: orange;
+}
+
+#power-profiles-daemon.balanced {
+    color: darkcyan;
+}
+
+#power-profiles-daemon.power-saver {
+    color: lightgreen;
+}
+
 #tray menu {
     background: @modfginv;
     padding: 5px;
@@ -165,6 +177,22 @@ tooltip label {
 #custom-arch {
     padding-left: 6px;
     padding-right: 2px;
+}
+
+
+#custom-pomodoro.work {
+    background: lightblue;
+    color: black;
+}
+
+#custom-pomodoro.break {
+    background: lightgreen;
+    color: black;
+}
+
+#custom-pomodoro.pause {
+    background: yellow;
+    color: black;
 }
 
 #network {
