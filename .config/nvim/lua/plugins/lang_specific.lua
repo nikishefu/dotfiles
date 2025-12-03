@@ -12,5 +12,13 @@ return {
             vim.keymap.set('n', '<leader>dl', dap.step_into)
             vim.keymap.set('n', '<leader>bp', dap.toggle_breakpoint)
         end
-    }
+    },
+    {
+        "yanskun/gotests.nvim",
+        ft = "go",
+        config = function()
+            require("gotests").setup()
+            vim.keymap.set('n', '<leader>gt', "<Cmd>GoTests<CR>")
+        end,
+    },
 }
