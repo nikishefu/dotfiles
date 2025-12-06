@@ -48,4 +48,4 @@ export PATH="$PATH:/home/nikita/.local/bin"
 eval "$(register-python-argcomplete pipx)"
 
 
-alias notes='tw ~/Notes && nvim'
+alias notes='cd ~/Notes && zk edit -i'
