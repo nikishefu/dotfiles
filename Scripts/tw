@@ -1,16 +1,22 @@
 #!/usr/bin/env bash
 
-selected=$({ \
-    fd --type directory --follow --hidden --max-depth 1 . \
-    ~/Scripts ~/Documents ~/.config ~/Downloads ~/; \ 
-    fd --type directory --follow --hidden . \
-    ~/Projects; } | fzf)
+set -euo pipefail
+
+if [ "$#" -ne 1 ]; then
+    selected=$({ \
+        fd --type directory --follow --hidden --max-depth 1 . \
+        ~/Scripts ~/Documents ~/.config ~/Downloads ~/; \ 
+        fd --type directory --follow --hidden . \
+        ~/Projects; } | fzf)
+else
+    selected="$1"
+fi
 
 if [[ -z $selected ]]; then
     exit 0
 fi
 
-if [[ -z $TMUX ]]; then
+if [[ -z ${TMUX+x} ]]; then
     tmux new-session -c $selected
 else
     tmux send-keys "cd $selected" C-m
