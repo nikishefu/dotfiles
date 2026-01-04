@@ -6,12 +6,13 @@ application/x-extension-shtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
 application/x-extension-xhtml=firefox.desktop;
 application/xhtml+xml=firefox.desktop;
-text/html=firefox.desktop;
+image/heif=org.kde.gwenview.desktop;
+inode/directory=thunar.desktop;yazi.desktop;org.kde.kate.desktop;kitty-open.desktop;org.kde.gwenview.desktop;org.kde.filelight.desktop;
+text/html=firefox.desktop;nvim.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;micro.desktop;libreoffice-writer.desktop;okularApplication_txt.desktop;vim.desktop;
 video/quicktime=mpv.desktop;vlc.desktop;
 x-scheme-handler/chrome=firefox.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
-image/heif=org.kde.gwenview.desktop;
 
 [Default Applications]
 application/pdf=org.kde.okular.desktop;
@@ -21,8 +22,8 @@ application/x-extension-shtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/xhtml+xml=firefox.desktop
-inode/directory=thunar.desktop
-text/html=firefox.desktop
+inode/directory=thunar.desktop;
+text/html=firefox.desktop;
 text/plain=nvim.desktop
 video/quicktime=mpv.desktop;
 x-scheme-handler/about=firefox.desktop
@@ -33,3 +34,7 @@ x-scheme-handler/https=firefox.desktop
 x-scheme-handler/io.element.desktop=io.element.Element.desktop
 x-scheme-handler/msteams=teams.desktop
 x-scheme-handler/unknown=firefox.desktop
+
+[Removed Associations]
+inode/directory=org.kde.dolphin.desktop;
+text/html=brave-browser.desktop;chromium.desktop;
