@@ -43,9 +43,4 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init - bash)"
 fi
 
-# Created by `pipx` on 2025-12-01 09:47:43
-export PATH="$PATH:/home/nikita/.local/bin"
-eval "$(register-python-argcomplete pipx)"
-
-
 alias notes='cd ~/Notes && zk edit -i'
