@@ -3,11 +3,13 @@
 set -euo pipefail
 
 headphones="alsa_output.usb-BEHRINGER_UMC204HD_192k-00.HiFi__Line1__sink"
-speakers="TU106 High Definition Audio Controller Digital Stereo (HDMI)"
-default_sink=$(wpctl status | grep Default -A2 | grep Sink | awk '{print $3}')
+speakers="alsa_output.pci-0000_09_00.1.hdmi-stereo"
+default_sink=$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep node.name | awk '{print $NF}' | tr -d '"')
+
+echo $default_sink
 
 set_default_sink() {
-    wpctl set-default $(wpctl status | grep "$1 " | awk '{print $2}')
+    wpctl set-default $(pw-dump | jq ".[] | select(.type==\"PipeWire:Interface:Node\") | select(.info.props.\"media.class\"==\"Audio/Sink\") | .info.props | select(.\"node.name\"==\"$1\") | .\"object.id\"")
 }
 
 if [ "$default_sink" = "$headphones" ]; then

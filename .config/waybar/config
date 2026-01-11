@@ -16,7 +16,6 @@
         "clock",
         "privacy",
         "systemd-failed-units",
-        "custom/pomodoro",
     ],
 
     "modules-right": [
@@ -34,14 +33,6 @@
     	"format": "󰣇 ",
         "tooltip": false,
 	},
-
-    "custom/pomodoro": {
-        "format": "{}",
-        "return-type": "json",
-        "exec": "waybar-module-pomodoro -a  -b  -w 60 -s 30 -l 60 -i 3",
-        "on-click": "waybar-module-pomodoro toggle",
-        "on-click-right": "waybar-module-pomodoro reset",
-    },
 
     "privacy": {
         "icon-spacing": 5,
@@ -103,8 +94,10 @@
     },
 
     "wireplumber": {
-	    "format": "{volume}% {icon}",
-	    "format-muted": "{volume}%  ",
+	    "format": "<span alpha=\"50%\">{node_name}</span> {volume}% {icon}",
+        "scroll-step": 2.0,
+        "max-volume": 140.0,
+	    "format-muted": "<span alpha=\"50%\">{node_name}</span> {volume}%  ",
 	    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
 	    "on-click-right": "~/Scripts/toggle_sink",
 	    "format-icons": [" ", " ", " "]
