@@ -23,7 +23,6 @@
         "hyprland/language",
         "power-profiles-daemon",
         "cpu",
-        "network",
         "upower",
     ],
 

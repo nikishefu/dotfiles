@@ -76,6 +76,20 @@ window#waybar {
     border-radius: 5px;
 }
 
+#privacy-item {
+    border-radius: 5px;
+    padding: 0 7px;
+    color: black;
+}
+
+#privacy-item.audio-in {
+    background: #7DD3FC;
+}
+
+#privacy-item.screenshare {
+    background: #86EFAC;
+}
+
 .modules-left {
     border-radius: 0 0 5px 0;
 }

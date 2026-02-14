@@ -310,6 +310,7 @@ return {
         opts = {},
         config = function()
             require('render-markdown').setup({
+                render_modes = true,
                 completions = { lsp = { enabled = true } },
             })
         end
