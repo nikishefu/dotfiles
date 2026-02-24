@@ -380,6 +380,11 @@ return {
 			require("render-markdown").setup({
 				render_modes = true,
 				completions = { lsp = { enabled = true } },
+				checkbox = {
+					unchecked = { icon = "✘ " },
+					checked = { icon = "✔ " },
+					custom = { todo = { rendered = "◯ " } },
+				},
 			})
 		end,
 	},
@@ -412,7 +417,7 @@ return {
 		config = function()
 			require("lint").linters_by_ft = {
 				python = { "ruff" },
-				go = { "golangci_lint" },
+				yaml = { "yamllint" },
 			}
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()
