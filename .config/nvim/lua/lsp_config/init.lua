@@ -17,11 +17,6 @@ local lsp_attach = function(client, bufnr)
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
     vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
     vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-
-    lsp_zero.buffer_autoformat()
-    vim.keymap.set({ 'n', 'x' }, 'gq', function()
-        vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-    end, opts)
 end
 
 lsp_zero.extend_lspconfig({
