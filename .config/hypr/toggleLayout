@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+currentLayout="$(hyprctl -j activeworkspace | jq '.tiledLayout')"
+if [ "$currentLayout" == '"dwindle"' ]; then
+    hyprctl keyword workspace $(hyprctl -j activeworkspace | jq '.id'),layout:scrolling
+else
+    hyprctl keyword workspace $(hyprctl -j activeworkspace | jq '.id'),layout:dwindle
+fi
