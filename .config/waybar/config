@@ -9,6 +9,7 @@
         "hyprland/workspaces",
         "idle_inhibitor",
         "wireplumber",
+        "wireplumber#source",
         "bluetooth",
     ],
  
@@ -101,6 +102,14 @@
 	    "on-click-right": "~/Scripts/toggle_sink",
 	    "format-icons": [" ", " ", " "]
 	},
+
+    "wireplumber#source": {
+        "node-type": "Audio/Source",
+        "format": "{volume}%  ",
+        "format-muted": "{volume}%  ",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "scroll-step": 5,
+    },
 
     "systemd-failed-units": {
         "format": "Units failed: {nr_failed}"
