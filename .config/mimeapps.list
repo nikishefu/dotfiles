@@ -14,7 +14,7 @@ x-scheme-handler/chrome=firefox.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 text/plain=okularApplication_txt.desktop;
-image/png=mupdf.desktop;
+image/png=okularApplication_kimgio.desktop;
 
 [Default Applications]
 application/pdf=org.kde.okular.desktop;
