@@ -13,6 +13,8 @@ video/quicktime=mpv.desktop;vlc.desktop;
 x-scheme-handler/chrome=firefox.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
+text/plain=okularApplication_txt.desktop;
+image/png=mupdf.desktop;
 
 [Default Applications]
 application/pdf=org.kde.okular.desktop;
@@ -34,6 +36,7 @@ x-scheme-handler/https=firefox.desktop
 x-scheme-handler/io.element.desktop=io.element.Element.desktop
 x-scheme-handler/msteams=teams.desktop
 x-scheme-handler/unknown=firefox.desktop
+x-scheme-handler/bruno=bruno.desktop
 
 [Removed Associations]
 inode/directory=org.kde.dolphin.desktop;
