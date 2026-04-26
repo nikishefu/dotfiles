@@ -3,16 +3,27 @@
 set -euo pipefail
 
 headphones="alsa_output.usb-BEHRINGER_UMC204HD_192k-00.HiFi__Line1__sink"
-speakers="alsa_output.pci-0000_09_00.1.hdmi-stereo"
+speakers="bluez_output.C0_84_7D_C3_D9_1B.1"
+speakersBT="C0:84:7D:C3:D9:1B"
 default_sink=$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep node.name | awk '{print $NF}' | tr -d '"')
-
-echo $default_sink
 
 set_default_sink() {
     wpctl set-default $(pw-dump | jq ".[] | select(.type==\"PipeWire:Interface:Node\") | select(.info.props.\"media.class\"==\"Audio/Sink\") | .info.props | select(.\"node.name\"==\"$1\") | .\"object.id\"")
 }
 
+connectBT() {
+        bluetoothctl connect "$1"
+
+        for i in {1..20}; do
+            if bluetoothctl info "$1" | grep -q "Connected: yes"; then
+                break
+            fi
+            sleep 0.5
+        done
+}
+
 if [ "$default_sink" = "$headphones" ]; then
+    connectBT "$speakersBT"
     set_default_sink "$speakers"
 else
     set_default_sink "$headphones"

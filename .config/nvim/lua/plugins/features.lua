@@ -400,6 +400,7 @@ return {
 					javascript = { "prettierd", "prettier", stop_after_first = true },
 					go = { "goimports", "gofumpt" },
 					terraform = { "terraform_fmt" },
+					json = { "prettier" },
 				},
 				format_on_save = {
 					-- These options will be passed to conform.format()
