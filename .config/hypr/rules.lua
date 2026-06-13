@@ -14,7 +14,7 @@ local ultrawide_width = {
 	},
 }
 
-local mon = hl.get_active_monitor()
+local mon = hl.get_monitor(0)
 local ratio = mon.width / mon.height
 local width
 if ratio > 2.2 then
