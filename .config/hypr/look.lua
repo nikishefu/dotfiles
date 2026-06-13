@@ -40,7 +40,7 @@ hl.config({
 	scrolling = {
 		fullscreen_on_one_column = false,
 		follow_min_visible = 0.8,
-		column_width = 0.3,
+		-- column_width in rules.lua
 	},
 	misc = {
 		force_default_wallpaper = -1,
