@@ -1,4 +1,4 @@
-require('remap')
+require("remap")
 
 vim.opt.termguicolors = true
 
@@ -28,31 +28,31 @@ vim.opt.colorcolumn = "80"
 require("lazyconf")
 require("lsp_config")
 
-vim.api.nvim_set_hl(0, 'DiagnosticNumHLError', { link = 'DiagnosticError' })
-vim.api.nvim_set_hl(0, 'DiagnosticNumHLWarn', { link = 'DiagnosticWarn' })
-vim.api.nvim_set_hl(0, 'DiagnosticNumHLInfo', { link = 'DiagnosticInfo' })
-vim.api.nvim_set_hl(0, 'DiagnosticNumHLHint', { link = 'DiagnosticHint' })
+vim.api.nvim_set_hl(0, "DiagnosticNumHLError", { link = "DiagnosticError" })
+vim.api.nvim_set_hl(0, "DiagnosticNumHLWarn", { link = "DiagnosticWarn" })
+vim.api.nvim_set_hl(0, "DiagnosticNumHLInfo", { link = "DiagnosticInfo" })
+vim.api.nvim_set_hl(0, "DiagnosticNumHLHint", { link = "DiagnosticHint" })
 
 vim.diagnostic.config({
-    signs = {
-        numhl = {
-            [vim.diagnostic.severity.ERROR] = 'DiagnosticNumHLError',
-            [vim.diagnostic.severity.WARN]  = 'DiagnosticNumHLWarn',
-            [vim.diagnostic.severity.INFO]  = 'DiagnosticNumHLInfo',
-            [vim.diagnostic.severity.HINT]  = 'DiagnosticNumHLHint',
-        }
-    }
+	signs = {
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticNumHLError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticNumHLWarn",
+			[vim.diagnostic.severity.INFO] = "DiagnosticNumHLInfo",
+			[vim.diagnostic.severity.HINT] = "DiagnosticNumHLHint",
+		},
+	},
 })
 
 -- Diagnostic signs remove bg
-vim.api.nvim_set_hl(0, 'DiagnosticSignError', { link = 'DiagnosticError', bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'DiagnosticSignWarn', { link = 'DiagnosticWarn', bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'DiagnosticSignInfo', { link = 'DiagnosticInfo', bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'DiagnosticSignHint', { link = 'DiagnosticHint', bg = 'NONE' })
+vim.api.nvim_set_hl(0, "DiagnosticSignError", { link = "DiagnosticError", bg = "NONE" })
+vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { link = "DiagnosticWarn", bg = "NONE" })
+vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { link = "DiagnosticInfo", bg = "NONE" })
+vim.api.nvim_set_hl(0, "DiagnosticSignHint", { link = "DiagnosticHint", bg = "NONE" })
 
 -- Wrap for specific filetypes
-vim.api.nvim_create_autocmd('BufEnter', {
-    pattern = { '*.org' },
-    group = group,
-    command = 'setlocal wrap'
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "*.md" },
+	group = group,
+	command = "setlocal wrap",
 })

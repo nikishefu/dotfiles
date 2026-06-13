@@ -7,56 +7,64 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
 		config = function()
-			local configs = require("nvim-treesitter.configs")
+			local ts = require("nvim-treesitter")
 
-			configs.setup({
-				ensure_installed = {
-					"cpp",
-					"css",
-					"cmake",
-					"python",
-					"dockerfile",
-					"bash",
-					"yaml",
-					"go",
-					"gosum",
-					"gomod",
-					"c",
-					"lua",
-					"vim",
-					"query",
-					"hyprlang",
-					"jq",
-					"make",
-					"toml",
-					"tmux",
-					"markdown_inline",
-					"rust",
-					"ssh_config",
-					"sql",
-					"strace",
-					"diff",
-					"csv",
-					"git_config",
-					"gitcommit",
-					"gitignore",
-					"git_rebase",
-					"json",
-				},
+			ts.setup({
+				install_dir = vim.fn.stdpath("data") .. "/site",
+			})
 
-				-- Install parsers synchronously (only applied to `ensure_installed`)
-				sync_install = false,
+			local my_languages = {
+				"cpp",
+				"css",
+				"cmake",
+				"python",
+				"dockerfile",
+				"bash",
+				"yaml",
+				"go",
+				"gosum",
+				"gomod",
+				"c",
+				"lua",
+				"vim",
+				"query",
+				"hyprlang",
+				"jq",
+				"make",
+				"toml",
+				"tmux",
+				"markdown_inline",
+				"rust",
+				"ssh_config",
+				"sql",
+				"strace",
+				"diff",
+				"csv",
+				"git_config",
+				"gitcommit",
+				"gitignore",
+				"git_rebase",
+				"json",
+			}
 
-				-- Automatically install missing parsers when entering buffer
-				-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-				auto_install = true,
+			ts.install(my_languages)
 
-				-- List of parsers to ignore installing (or "all")
+			local ts_group = vim.api.nvim_create_augroup("NativeTreesitterSetup", { clear = true })
 
-				highlight = { enable = true },
-				indent = { enable = true },
+			vim.api.nvim_create_autocmd("FileType", {
+				group = ts_group,
+				pattern = my_languages,
+				callback = function(args)
+					local buf = args.buf
+
+					vim.treesitter.start(buf)
+					vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+					vim.wo[0].foldmethod = "expr"
+					vim.wo[0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+					vim.wo[0].foldlevel = 99
+				end,
 			})
 		end,
 	},
