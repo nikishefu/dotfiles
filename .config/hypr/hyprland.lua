@@ -1,0 +1,8 @@
+require("monitors")
+require("autostart")
+require("env")
+require("permissions")
+require("look")
+require("input")
+require("binds")
+require("rules")

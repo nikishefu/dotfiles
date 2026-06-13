@@ -1,0 +1,8 @@
+hl.env("TZ", "Europe/Moscow")
+hl.env("EDITOR", "nvim")
+hl.env("HYPRCURSOR_THEME", "capitaine-cursors")
+hl.env("HYPRCURSOR_SIZE", "32")
+hl.env("XDG_MENU_PREFIX", "plasma-")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("NVD_BACKEND", "direct")
+hl.env("SSH_AUTH_SOCK", "$XDG_RUNTIME_DIR/ssh-agent.socket")
