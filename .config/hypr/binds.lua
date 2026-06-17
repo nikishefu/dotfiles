@@ -30,6 +30,14 @@ hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("hyprshutdown"))
 hl.bind(mainMod .. " + DELETE", hl.dsp.exec_cmd("systemctl poweroff"))
 hl.bind(mainMod .. " + SHIFT + DELETE", hl.dsp.exec_cmd("systemctl reboot"))
 
+-- Actions
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp -w 0 -d )" - | swappy -f -'))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker -a"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker -a"))
+
+-- VPN
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("ip a | grep tun0 && nmcli con down Infra || nmcli con up Infra"))
+
 -- ======
 -- Window
 -- ======
