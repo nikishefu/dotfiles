@@ -47,6 +47,9 @@ hl.config({
 		disable_hyprland_logo = false,
 		allow_session_lock_restore = true,
 	},
+	xwayland = {
+		force_zero_scaling = true,
+	},
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
