@@ -1,0 +1,32 @@
+window {
+    background-image: url("/tmp/lock.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: black;
+}
+
+#window-box {
+    padding: 32px;
+    border: 1px solid #444;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 12px;
+    background-color: #222;
+}
+
+#playerctl-revealer>box {
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 20px;
+    padding: 1em;
+    margin-bottom: 4em;
+}
+
+/* hide "Password:" label */
+#input-label {
+    font-size: 0;
+}
+
+#clock-label {
+    font-size: 4em;
+}
