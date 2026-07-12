@@ -6,5 +6,10 @@ fi
 
 hyprctl switchxkblayout keyd-virtual-keyboard 0
 grim /tmp/lock.jpg
-convert -scale 10% -blur 0x2.5 -resize 1000% /tmp/lock.jpg /tmp/lock.jpg
+
+convert \
+    -scale 5% \
+    -fill black -colorize 20 \
+    -scale 2000% \
+    /tmp/lock.jpg /tmp/lock.jpg
 gtklock
