@@ -21,6 +21,9 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("thunar"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("Telegram"))
 
+-- Work mode
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/Documents/KeePass/work-mode"))
+
 -- Service commands
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("killall waybar ; sleep 1 && waybar"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload && notify-send 'Hyprland reloaded'"))
