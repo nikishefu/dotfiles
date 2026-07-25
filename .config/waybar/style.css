@@ -4,21 +4,20 @@
 @define-color critical #c44;
 
 @define-color light rgb(250, 250, 250);
-@define-color dark rgb(30, 30, 30);
+@define-color dark rgb(0, 0, 0);
 
 @define-color darkbg rgba(30, 30, 30, 0.8);
-@define-color lightbg rgba(250, 250, 250, 0.7);
+@define-color lightbg rgba(255, 255, 255, 0.2);
 
-@define-color modbor #333;
 @define-color modshad @dark;
+@define-color modfg @dark;
+@define-color modbginv @dark;
+@define-color modborinv @dark;
 
-@define-color modbg @darkbg;
-@define-color modfg @light;
+@define-color modbg @lightbg;
+@define-color modfginv @light;
+@define-color modbor rgba(30, 30, 30, 0.2);
 
-@define-color modbginv @light;
-@define-color modfginv @dark;
-
-@define-color modborinv @light;
 
 /* Reset all styles */
 * {
@@ -33,7 +32,7 @@ window#waybar {
     font-weight: bold;
 
     background: @modbg;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid @modbor;
 }
 
 #power-profiles-daemon.performance {
@@ -69,11 +68,11 @@ window#waybar {
 .module,
 #privacy {
     color: @modfg;
-    margin: 1px;
+    margin: 1px 0 2px 0;
     background: none;
 
-    padding: 0 8px;
-    border-radius: 5px;
+    padding: 0 7px;
+    border-radius: 3px;
 }
 
 #privacy-item {
@@ -90,16 +89,36 @@ window#waybar {
     background: #86EFAC;
 }
 
+/*
 .modules-left {
+    background: @modbg;
+    border-bottom: 1px solid @modbor;
+    border-right: 1px solid @modbor;
     border-radius: 0 0 5px 0;
 }
 
 .modules-center {
+    background: @modbg;
+    border-bottom: 1px solid @modbor;
+    border-right: 1px solid @modbor;
+    border-left: 1px solid @modbor;
     border-radius: 0 0 5px 5px;
 }
 
 .modules-right {
+    background: @modbg;
+    border-bottom: 1px solid @modbor;
+    border-left: 1px solid @modbor;
     border-radius: 0 0 0 5px;
+}
+*/
+
+.modules-right {
+    padding-right: 1px;
+}
+
+.modules-left {
+    padding-left: 1px;
 }
 
 tooltip {
