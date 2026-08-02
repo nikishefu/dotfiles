@@ -117,8 +117,8 @@ hl.bind(
 	{ locked = true, repeating = true }
 )
 hl.bind(
-	mainMod .. " + SHIFT + XF86MonBrightnessDown",
-	hl.dsp.exec_cmd("hyprsunset -t 4000"),
+	mainMod .. " + S",
+	hl.dsp.exec_cmd("pkill hyprsunset || hyprsunset -t 4000"),
 	{ locked = true, repeating = true }
 )
 
