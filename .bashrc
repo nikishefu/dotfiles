@@ -44,3 +44,4 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 alias notes='cd ~/Notes && zk edit -i'
+export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
