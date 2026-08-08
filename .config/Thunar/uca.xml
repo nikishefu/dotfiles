@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1771171798653836-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>edit-select-text</icon>
+	<name>Append .log</name>
+	<submenu></submenu>
+	<unique-id>1784182334238113-1</unique-id>
+	<command>for file in %F; do mv &quot;$file&quot; &quot;$file.log&quot;; done</command>
+	<description>Adds .log to the end of selected files</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>kitty</icon>
+	<name>Open kitty here</name>
+	<submenu></submenu>
+	<unique-id>1784182643936260-2</unique-id>
+	<command>kitty -d %d</command>
+	<description>Open kitty in a folder with this file</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+</actions>
