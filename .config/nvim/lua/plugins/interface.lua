@@ -13,8 +13,6 @@ return {
 		opts = {},
 		config = function()
 			require("tokyonight").setup({
-				-- use the night style
-				style = "night",
 				on_colors = function(colors)
 					colors.bg = "#181818"
 					colors.bg_dark = "#151515"
@@ -26,6 +24,9 @@ return {
 					colors.bg_sidebar = colors.bg
 					colors.bg_statusline = colors.bg
 					colors.bg_visual = colors.bg_highlight
+
+					colors.fg = "#eeeeff"
+					colors.comment = "#6873a0"
 				end,
 
 				on_highlights = function(highlights, colors)
@@ -36,8 +37,8 @@ return {
 
 				styles = {
 					-- Background styles. Can be "dark", "transparent" or "normal"
-					sidebars = "normal", -- style for sidebars, see below
-					floats = "normal", -- style for floating windows
+					sidebars = "transparent", -- style for sidebars, see below
+					floats = "transparent", -- style for floating windows
 				},
 			})
 			vim.cmd([[ colorscheme tokyonight-night ]])

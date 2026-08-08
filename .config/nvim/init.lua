@@ -56,3 +56,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	group = group,
 	command = "setlocal wrap",
 })
+
+-- The next line has to be after all mappings.
+require("langmapper").automapping({ global = true, buffer = true })

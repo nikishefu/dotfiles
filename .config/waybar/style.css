@@ -7,11 +7,11 @@
 @define-color dark rgb(0, 0, 0);
 
 @define-color darkbg rgba(30, 30, 30, 0.8);
-@define-color lightbg rgba(255, 255, 255, 0.2);
+@define-color lightbg rgba(230, 240, 255, 0.6);
 
 @define-color modshad @dark;
 @define-color modfg @dark;
-@define-color modbginv @dark;
+@define-color modbginv #334178;
 @define-color modborinv @dark;
 
 @define-color modbg @lightbg;
@@ -166,6 +166,10 @@ tooltip label {
 
 #workspaces button.urgent {
     background-color: @critical;
+}
+
+#workspaces button.urgent * {
+    color: @light;
 }
 
 #workspaces button {
