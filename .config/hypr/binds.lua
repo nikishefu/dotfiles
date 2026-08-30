@@ -6,7 +6,7 @@ local terminal = "kitty"
 -- ========
 
 -- Terminal apps
-hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal), { dont_inhibit = true })
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(terminal .. " -e qalc"))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd(terminal .. " -e ~/Scripts/timer"))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(terminal .. " -e clipse"))
@@ -20,6 +20,7 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("thunar"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("Telegram"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("keepassxc"))
 
 -- Work mode
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/Documents/KeePass/work-mode"))
@@ -44,28 +45,32 @@ hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("ip a | grep tun0 && nmcli co
 -- Window
 -- ======
 
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }), { dont_inhibit = true })
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }), { dont_inhibit = true })
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }), { dont_inhibit = true })
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }), { dont_inhibit = true })
 
-hl.bind(mainMod .. " + SHIFT + H", hl.dsp.layout("swapcol l"))
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("swapcol r"))
-hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.swap({ direction = "up" }))
-hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "down" }))
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.layout("swapcol l"), { dont_inhibit = true })
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("swapcol r"), { dont_inhibit = true })
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.swap({ direction = "up" }), { dont_inhibit = true })
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "down" }), { dont_inhibit = true })
 
-hl.bind(mainMod .. " + period", hl.dsp.layout("colresize +0.1"))
-hl.bind(mainMod .. " + comma", hl.dsp.layout("colresize -0.1"))
-hl.bind(mainMod .. " + slash", hl.dsp.layout("consume_or_expel prev"))
-hl.bind(mainMod .. " + SHIFT + slash", hl.dsp.layout("consume_or_expel next"))
+hl.bind(mainMod .. " + period", hl.dsp.layout("colresize +0.1"), { dont_inhibit = true })
+hl.bind(mainMod .. " + comma", hl.dsp.layout("colresize -0.1"), { dont_inhibit = true })
+hl.bind(mainMod .. " + slash", hl.dsp.layout("consume_or_expel prev"), { dont_inhibit = true })
+hl.bind(mainMod .. " + SHIFT + slash", hl.dsp.layout("consume_or_expel next"), { dont_inhibit = true })
 
 -- Workspaces
 for key = 1, 9 do
-	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = key }))
-	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = key, follow = false }))
+	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = key }), { dont_inhibit = true })
+	hl.bind(
+		mainMod .. " + SHIFT + " .. key,
+		hl.dsp.window.move({ workspace = key, follow = false }),
+		{ dont_inhibit = true }
+	)
 end
-hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = "special:magic" }))
-hl.bind("SUPER + 0", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = "special:magic" }), { dont_inhibit = true })
+hl.bind("SUPER + 0", hl.dsp.workspace.toggle_special("magic"), { dont_inhibit = true })
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -79,6 +84,8 @@ hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+
+hl.bind(mainMod .. " + I", hl.dsp.window.float({ action = "toggle" }))
 
 -- ===============
 -- Multimedia keys
@@ -109,18 +116,14 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 10%-
 hl.bind(
 	mainMod .. " + XF86MonBrightnessUp",
 	hl.dsp.exec_cmd("ddcutil setvcp 10 100 && pkill hyprsunset"),
-	{ locked = true, repeating = true }
+	{ locked = true }
 )
 hl.bind(
 	mainMod .. " + XF86MonBrightnessDown",
 	hl.dsp.exec_cmd("ddcutil setvcp 10 0 && hyprsunset -t 4000"),
-	{ locked = true, repeating = true }
+	{ locked = true }
 )
-hl.bind(
-	mainMod .. " + S",
-	hl.dsp.exec_cmd("pkill hyprsunset || hyprsunset -t 4000"),
-	{ locked = true, repeating = true }
-)
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("pkill hyprsunset || hyprsunset -t 4000"), { locked = true })
 
 -- Player
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
