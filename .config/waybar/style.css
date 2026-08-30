@@ -6,17 +6,17 @@
 @define-color light rgb(250, 250, 250);
 @define-color dark rgb(0, 0, 0);
 
-@define-color darkbg rgba(30, 30, 30, 0.8);
+@define-color darkbg rgba(30, 30, 30, 0.6);
 @define-color lightbg rgba(230, 240, 255, 0.6);
 
 @define-color modshad @dark;
-@define-color modfg @dark;
-@define-color modbginv #334178;
-@define-color modborinv @dark;
+@define-color modfg @light;
+@define-color modbginv #ffdddd;
+@define-color modborinv @light;
 
-@define-color modbg @lightbg;
-@define-color modfginv @light;
-@define-color modbor rgba(30, 30, 30, 0.2);
+@define-color modbg @darkbg;
+@define-color modfginv @dark;
+@define-color modbor rgba(100, 100, 100, 0.2);
 
 
 /* Reset all styles */
@@ -212,22 +212,6 @@ tooltip label {
 #custom-arch {
     padding-left: 6px;
     padding-right: 2px;
-}
-
-
-#custom-pomodoro.work {
-    background: lightblue;
-    color: black;
-}
-
-#custom-pomodoro.break {
-    background: lightgreen;
-    color: black;
-}
-
-#custom-pomodoro.pause {
-    background: yellow;
-    color: black;
 }
 
 #network {
