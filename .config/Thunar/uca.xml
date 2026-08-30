@@ -39,4 +39,15 @@
 	<text-files/>
 	<video-files/>
 </action>
+<action>
+	<icon>accessories-image-viewer</icon>
+	<name>Set as wallpaper</name>
+	<submenu></submenu>
+	<unique-id>1786983868813248-1</unique-id>
+	<command>awww img --transition-type any --transition-duration 1 --transition-fps 180 %f</command>
+	<description>Set this image as a wallpaper with awww</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
 </actions>
