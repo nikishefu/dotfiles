@@ -410,11 +410,6 @@ return {
 					terraform = { "terraform_fmt" },
 					json = { "prettier" },
 				},
-				format_on_save = {
-					-- These options will be passed to conform.format()
-					timeout_ms = 500,
-					lsp_format = "fallback",
-				},
 			})
 			vim.keymap.set("n", "gq", function()
 				require("conform").format()
