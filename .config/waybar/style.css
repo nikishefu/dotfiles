@@ -11,7 +11,7 @@
 
 @define-color modshad @dark;
 @define-color modfg @light;
-@define-color modbginv #ffdddd;
+@define-color modbginv #ccddff;
 @define-color modborinv @light;
 
 @define-color modbg @darkbg;
