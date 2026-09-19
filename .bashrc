@@ -23,7 +23,6 @@ export PATH=$PATH:$(go env GOPATH)/bin
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias nv='nvim'
 alias sv='EDITOR=nvim sudoedit'
 alias e='yazi'
 alias tmux='TERM=xterm-256color tmux'
@@ -46,3 +45,4 @@ fi
 alias notes='cd ~/Notes && zk edit -i'
 export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
 
+nv() { if [[ -v TMUX ]]; then tmux new-window nvim "$@"; else tmux new-session nvim "$@"; fi; }

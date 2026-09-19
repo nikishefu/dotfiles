@@ -16,9 +16,9 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-if [[ -z ${TMUX+x} ]]; then
-    tmux new-session -c $selected
-else
+if [[ -v TMUX ]]; then
     tmux send-keys "cd $selected" C-m
+else
+    tmux new-session -c $selected
 fi
 
