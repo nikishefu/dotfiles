@@ -60,3 +60,14 @@ hl.layer_rule({
 	blur = true,
 	ignore_alpha = 0.1,
 })
+
+hl.window_rule({
+    name = "floating-thunar-rename",
+    match = {
+        class = "Thunar",
+        title = "^Rename .*"
+    },
+
+	float = true,
+	size = { 500, 100 },
+})

@@ -28,9 +28,9 @@ alias sv='EDITOR=nvim sudoedit'
 alias e='yazi'
 alias tmux='TERM=xterm-256color tmux'
 alias ssh='TERM=xterm-256color ssh'
-alias proxy='https_proxy="socks5://127.0.0.1:10808"'
-alias kubectl='minikube kubectl --'
-PS1='\[\e[38;5;16m\]$(exitstatus)\u\[\e[38;5;17m\]@\[\e[38;5;16m\]\h \[\e[38;5;195m\]\w$(__git_ps1) \[\033[0m\]\n\$ '
+alias proxy='http_proxy="http://127.0.0.1:10809"'
+alias claude='proxy claude'
+PS1='\[\e[38;5;255m\]$(exitstatus)\[\e[38;5;159m\]\u\[\e[38;5;245m\]@\[\e[38;5;117m\]\h \[\e[38;5;153m\]\w\[\e[38;5;177m\]$(__git_ps1 " (%s)")\[\e[0m\] \[\e[38;5;80m\]\t\[\e[0m\]\n\[\e[38;5;80m\]\$ \[\e[0m\]'
 
 # The next line updates PATH for CLI.
 if [ -f '/home/nikita/yandex-cloud/path.bash.inc' ]; then source '/home/nikita/yandex-cloud/path.bash.inc'; fi
@@ -45,3 +45,4 @@ fi
 
 alias notes='cd ~/Notes && zk edit -i'
 export CMAKE_BUILD_PARALLEL_LEVEL=$(nproc)
+

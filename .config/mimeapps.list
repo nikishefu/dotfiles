@@ -40,6 +40,7 @@ x-scheme-handler/io.element.desktop=io.element.Element.desktop
 x-scheme-handler/msteams=teams.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/bruno=bruno.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Removed Associations]
 inode/directory=org.kde.dolphin.desktop;
