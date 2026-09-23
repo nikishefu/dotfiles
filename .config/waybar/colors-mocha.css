@@ -34,6 +34,7 @@
 /* Per-module text */
 @define-color mod-arch @blue;
 @define-color mod-idle @lavender;
+@define-color mod-night @maroon;
 @define-color mod-audio @mauve;
 @define-color mod-mic @pink;
 @define-color mod-bluetooth @sapphire;

@@ -1,0 +1,12 @@
+[Unit]
+Description=Switch night mode in the morning and in the evening
+
+[Timer]
+# Keep in sync with NIGHT_START / NIGHT_END in ~/Scripts/night-mode.sh.
+# Missed runs (suspend) fire on resume; at login, Hyprland's autostart runs "auto".
+OnCalendar=*-*-* 07:00:00
+OnCalendar=*-*-* 21:00:00
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

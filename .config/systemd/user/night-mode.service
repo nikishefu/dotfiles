@@ -1,0 +1,6 @@
+[Unit]
+Description=Switch night mode according to the time of day
+
+[Service]
+Type=oneshot
+ExecStart=%h/Scripts/night-mode.sh auto

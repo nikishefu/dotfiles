@@ -8,6 +8,7 @@
         "custom/arch",
         "hyprland/workspaces",
         "idle_inhibitor",
+        "custom/night",
         "wireplumber",
         "wireplumber#source",
         "bluetooth",
@@ -41,6 +42,14 @@
         "return-type": "json",
         "interval": 10,
         "escape": false,
+    },
+
+    "custom/night": {
+        "exec": "~/Scripts/night-mode.sh status",
+        "return-type": "json",
+        "interval": 60,
+        "signal": 8,
+        "on-click": "~/Scripts/night-mode.sh toggle",
     },
 
     "privacy": {

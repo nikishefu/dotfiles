@@ -26,7 +26,7 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("keepassxc"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/Documents/KeePass/work-mode"))
 
 -- Service commands
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("killall waybar ; sleep 1 && waybar"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("pkill -SIGUSR2 waybar"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload && notify-send 'Hyprland reloaded'"))
 
 -- Session commands
@@ -40,6 +40,16 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker -a"))
 
 -- VPN
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("ip a | grep tun0 && nmcli con down Infra || nmcli con up Infra"))
+
+-- Headless mode: disable display, prevent sleep and lock. Press any key to exit
+hl.bind(mainMod .. " + SHIFT + C", function ()
+    hl.dispatch(hl.dsp.submap("headless"))
+end)
+hl.define_submap("headless", function()
+    hl.bind("catchall", function ()
+        hl.dsp.submap("reset")
+    end)
+end)
 
 -- ======
 -- Window
@@ -115,15 +125,15 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set +10%")
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 10%-"), { locked = true, repeating = true })
 hl.bind(
 	mainMod .. " + XF86MonBrightnessUp",
-	hl.dsp.exec_cmd("ddcutil setvcp 10 100 && pkill hyprsunset"),
+	hl.dsp.exec_cmd("~/Scripts/night-mode.sh disable"),
 	{ locked = true }
 )
 hl.bind(
 	mainMod .. " + XF86MonBrightnessDown",
-	hl.dsp.exec_cmd("ddcutil setvcp 10 0 && hyprsunset -t 4000"),
+	hl.dsp.exec_cmd("~/Scripts/night-mode.sh enable"),
 	{ locked = true }
 )
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("pkill hyprsunset || hyprsunset -t 4000"), { locked = true })
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("~/Scripts/night-mode.sh toggle"), { locked = true })
 
 -- Player
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })

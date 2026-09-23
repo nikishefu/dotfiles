@@ -17,6 +17,7 @@
 /* Per-module text */
 @define-color mod-arch @fg;
 @define-color mod-idle @fg;
+@define-color mod-night @fg;
 @define-color mod-audio @fg;
 @define-color mod-mic @fg;
 @define-color mod-bluetooth @fg;

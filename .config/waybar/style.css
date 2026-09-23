@@ -54,6 +54,7 @@ window#waybar {
 /* Per-module text colors (must come before the shared states) */
 #custom-arch           { color: @mod-arch; }
 #idle_inhibitor        { color: @mod-idle; }
+#custom-night          { color: @mod-night; }
 #wireplumber           { color: @mod-audio; }
 #wireplumber.source    { color: @mod-mic; }
 #bluetooth             { color: @mod-bluetooth; }
@@ -74,6 +75,7 @@ window#waybar {
 /* On / active */
 #bluetooth.connected,
 #idle_inhibitor.activated,
+#custom-night.on,
 #upower.charging,
 #battery.charging {
     color: @accent-fg;
