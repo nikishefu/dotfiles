@@ -1,0 +1,56 @@
+/* Palette — light */
+
+/* Base */
+@define-color light rgb(250, 250, 252);
+@define-color dark rgb(30, 32, 40);
+
+/* Bar */
+@define-color bar-bg rgba(255, 255, 255, 0);
+@define-color bar-border rgba(0, 0, 0, 0);
+
+/* Module pills */
+@define-color fg @dark;
+@define-color pill-bg rgba(248, 249, 252, 0.8);
+@define-color pill-border rgba(0, 0, 0, 0.10);
+@define-color tray-bg rgba(40, 42, 54, 0.85);
+
+/* Per-module text */
+@define-color mod-arch @fg;
+@define-color mod-idle @fg;
+@define-color mod-audio @fg;
+@define-color mod-mic @fg;
+@define-color mod-bluetooth @fg;
+@define-color mod-clock @fg;
+@define-color mod-xray @fg;
+@define-color mod-language @fg;
+@define-color mod-cpu @fg;
+@define-color mod-memory @fg;
+@define-color mod-network @fg;
+@define-color mod-battery @fg;
+
+/* "On" state: active workspace, connected, charging, inhibiting... */
+@define-color accent #3b5bdb;
+@define-color accent-fg @light;
+
+/* Status */
+@define-color success #2b8a3e;
+@define-color warning #e8590c;
+@define-color critical #e03131;
+@define-color status-fg @light;
+
+/* Tooltip & menus */
+@define-color tooltip-bg #f8f9fc;
+@define-color tooltip-fg @dark;
+@define-color menu-item-bg #ffffff;
+@define-color menu-item-bg-hover #eef1f6;
+@define-color menu-item-border #d8dce4;
+
+/* Privacy indicators */
+@define-color privacy-audio #1c7ed6;
+@define-color privacy-screen #2f9e44;
+@define-color privacy-fg @light;
+
+/* Power profiles */
+@define-color profile-performance #d9480f;
+@define-color profile-balanced #0b7285;
+@define-color profile-saver #2b8a3e;

@@ -1,0 +1,39 @@
+#!/bin/bash
+# Waybar module: xray observatory outbound latencies.
+# Requires xray "metrics" listening on $XRAY_METRICS (default 127.0.0.1:11111).
+
+URL="http://${XRAY_METRICS:-127.0.0.1:11111}/debug/vars"
+
+if ! vars=$(curl -sf --max-time 2 "$URL"); then
+    echo '{"text": "󰒄 off", "tooltip": "xray metrics unreachable", "class": "down"}'
+    exit 0
+fi
+
+jq -c '
+    def esc: gsub("&"; "&amp;") | gsub("<"; "&lt;") | gsub(">"; "&gt;");
+
+    (.observatory // {} | to_entries | sort_by(.key) | map(.value)) as $obs
+    | ($obs | map(select(.alive))) as $alive
+    | {
+        text: (
+            if ($obs | length) == 0 then "󰒄 --"
+            else "󰒄 " + ($obs | map(
+                .outbound_tag + " " +
+                (if .alive then "\(.delay)" else "<span alpha=\"50%\">✗</span>" end)
+            ) | join("  "))
+            end
+        ),
+        tooltip: ($obs | map(
+            if .alive then "\(.outbound_tag): \(.delay) ms"
+            else "\(.outbound_tag): dead\n  " + (.last_error_reason // "unknown" | esc)
+            end
+        ) | join("\n")),
+        class: (
+            if ($obs | length) == 0 then "down"
+            elif ($alive | length) == 0 then "critical"
+            elif ($alive | length) < ($obs | length) then "warning"
+            else "ok"
+            end
+        )
+    }
+' <<< "$vars"

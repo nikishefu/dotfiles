@@ -2,7 +2,7 @@
 {
     "layer": "top",
     "position": "top",
-    "spacing": 5,
+    "spacing": 4,
 
     "modules-left": [
         "custom/arch",
@@ -21,9 +21,11 @@
 
     "modules-right": [
         "tray",
+        "custom/xray",
         "hyprland/language",
         "power-profiles-daemon",
         "cpu",
+        "memory",
         "upower",
     ],
 
@@ -33,6 +35,13 @@
     	"format": "󰣇 ",
         "tooltip": false,
 	},
+
+    "custom/xray": {
+        "exec": "~/Scripts/xray-status",
+        "return-type": "json",
+        "interval": 10,
+        "escape": false,
+    },
 
     "privacy": {
         "icon-spacing": 5,
@@ -54,17 +63,12 @@
 
 	"bluetooth": {
 		"format": "",
-		"on-click": "blueberry",
+		"on-click": "blueman-manager",
 		"format-connected-battery": " {device_battery_percentage}%",
 		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
 		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
 		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
 		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
-    },
-
-    "cpu": {
-        "interval": 3,
-        "max-length": 10,
     },
 
     "power-profiles-daemon": {
@@ -74,8 +78,8 @@
       "format-icons": {
         "default": "",
         "performance": "",
-        "balanced": "",
-        "power-saver": ""
+        "balanced": " ",
+        "power-saver": " "
       }
     },
     
