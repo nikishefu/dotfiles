@@ -22,28 +22,41 @@ is_on() {
     pgrep -x hyprsunset >/dev/null
 }
 
+set_brightness() {
+    # Right after resume from suspend the GPU driver re-creates /dev/i2c-*, and
+    # udev needs a moment to restore our access ACL — retry instead of failing.
+    local attempt err
+    for attempt in 1 2 3 4 5 6; do
+        err=$(ddcutil setvcp 10 "$1" 2>&1 >/dev/null) && return 0
+        sleep 2
+    done
+    echo "ddcutil failed after $attempt attempts:" >&2
+    echo "$err" | grep -v -e 'lsof: WARNING' -e 'Output information' | head -5 >&2
+    return 1
+}
+
 refresh_waybar() {
     sleep 0.3  # let hyprsunset appear/disappear first
     pkill -RTMIN+"$WAYBAR_SIGNAL" -x waybar || true
 }
 
 enable() {
-    is_on && return
+    is_on && return 0
     echo "Enabling night mode"
     # Spawn through Hyprland so hyprsunset outlives whoever called us
     # (systemd oneshot, waybar click handler, ...)
     hyprctl dispatch "hl.dsp.exec_cmd('hyprsunset -t $TEMPERATURE')" >/dev/null 2>&1 \
         || setsid -f hyprsunset -t "$TEMPERATURE" >/dev/null 2>&1
     refresh_waybar
-    ddcutil setvcp 10 "$BRIGHTNESS_NIGHT"
+    set_brightness "$BRIGHTNESS_NIGHT"
 }
 
 disable() {
-    is_on || return
+    is_on || return 0
     echo "Disabling night mode"
     pkill -x hyprsunset
     refresh_waybar
-    ddcutil setvcp 10 "$BRIGHTNESS_DAY"
+    set_brightness "$BRIGHTNESS_DAY"
 }
 
 is_night_time() {
