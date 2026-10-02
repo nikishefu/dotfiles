@@ -33,7 +33,6 @@ return {
 				"jq",
 				"make",
 				"toml",
-				"tmux",
 				"markdown_inline",
 				"rust",
 				"ssh_config",

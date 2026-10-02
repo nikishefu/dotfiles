@@ -160,7 +160,7 @@
 
     "memory": {
         "interval": 5,
-        "format": "  {}%", // Icon: memory
+        "format": "  {percentage}% {swapPercentage}%", // Icon: memory
         "on-click": "kitty -e 'btm'", 
         "states": {
             "warning": 70,
