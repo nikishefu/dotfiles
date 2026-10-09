@@ -204,6 +204,42 @@ window#waybar {
     background: @menu-item-bg-hover;
 }
 
+/* Audio menu: drawn by ~/Scripts/audio-menu, which loads this file */
+window#audio-menu {
+    font-family: "JetBrainsMono Nerd Font", "HurmitNerdFont";
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#audio-menu .menu {
+    color: @mod-audio;
+    background-color: @pill-bg;
+    border: 1px solid @pill-border;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#audio-menu .menu.source {
+    color: @mod-mic;
+}
+
+#audio-menu button {
+    border-radius: 3px;
+    padding: 3px 6px;
+    margin: 1px;
+    transition: background-color 0.3s;
+}
+
+#audio-menu button:hover,
+#audio-menu button:focus {
+    background-color: alpha(@fg, 0.15);
+}
+
+#audio-menu button.current {
+    color: @accent-fg;
+    background-color: @accent;
+}
+
 tooltip {
     padding: 5px 12px;
     background-color: @tooltip-bg;

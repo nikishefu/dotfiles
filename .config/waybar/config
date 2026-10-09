@@ -112,7 +112,7 @@
         "max-volume": 140.0,
 	    "format-muted": "<span alpha=\"50%\">{node_name}</span> {volume}%  ",
 	    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-	    "on-click-right": "~/Scripts/toggle_sink",
+	    "on-click-right": "~/Scripts/audio-menu sink",
 	    "format-icons": [" ", " ", " "]
 	},
 
@@ -121,6 +121,7 @@
         "format": "{volume}%  ",
         "format-muted": "{volume}%  ",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-right": "~/Scripts/audio-menu source",
         "scroll-step": 5,
     },
 
