@@ -16,6 +16,13 @@ exitstatus() {
     fi
 }
 
+proxy() {
+    env HTTPS_PROXY=http://127.0.0.1:10809 \
+        HTTP_PROXY=http://127.0.0.1:10809 \
+        NO_PROXY=localhost,127.0.0.1,::1 \
+        "$@"
+}
+
 bind 'set show-all-if-ambiguous on'
 
 export PATH="$HOME/Scripts:$HOME/.config/emacs/bin:$PATH"
@@ -27,8 +34,8 @@ alias sv='EDITOR=nvim sudoedit'
 alias e='yazi'
 alias tmux='TERM=xterm-256color tmux'
 alias ssh='TERM=xterm-256color ssh'
-alias proxy='http_proxy="http://127.0.0.1:10809"'
 alias claude='proxy claude'
+alias codex='proxy codex'
 PS1='\[\e[38;5;255m\]$(exitstatus)\[\e[38;5;159m\]\u\[\e[38;5;245m\]@\[\e[38;5;117m\]\h \[\e[38;5;153m\]\w\[\e[38;5;177m\]$(__git_ps1 " (%s)")\[\e[0m\] \[\e[38;5;80m\]\t\[\e[0m\]\n\[\e[38;5;80m\]\$ \[\e[0m\]'
 
 # The next line updates PATH for CLI.
